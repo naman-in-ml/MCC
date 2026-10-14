@@ -19,7 +19,7 @@ export const DistrictTable: React.FC<DistrictTableProps> = ({
       <table className="w-full text-left text-xs">
         <thead className="bg-surface-secondary text-content-secondary border-b border-borderLine-subtle font-medium">
           <tr>
-            <th className="py-2.5 px-3 w-8">#</th>
+            <th className="py-2.5 px-3 w-8">SrNo.</th>
             <th className="py-2.5 px-3">District</th>
             <th className="py-2.5 px-3">Division</th>
             <th className="py-2.5 px-3 text-right">Releases</th>
@@ -43,21 +43,21 @@ export const DistrictTable: React.FC<DistrictTableProps> = ({
                     : 'hover:bg-surface-secondary'
                 }`}
               >
-                <td className="py-2.5 px-3 font-mono text-content-muted">{d.rank}</td>
-                <td className="py-2.5 px-3 font-semibold">{d.name}</td>
-                <td className="py-2.5 px-3 text-content-secondary">{d.division}</td>
-                <td className="py-2.5 px-3 text-right font-mono">{d.releases}</td>
-                <td className="py-2.5 px-3 text-right font-mono">{d.avgTAT}m</td>
-                <td className="py-2.5 px-3 text-right font-mono">{d.sentiment}%</td>
-                <td className="py-2.5 px-3 text-right font-mono">{d.crisisSLA}%</td>
-                <td className="py-2.5 px-3 text-right font-mono font-bold">{d.cpi}</td>
+                <td className="py-2.5 px-3 font-mono text-content-muted text-[12px] ">{d.rank}</td>
+                <td className="py-2.5 px-3 font-mono text-[12px] ">{d.name}</td>
+                <td className="py-2.5 px-3 text-content-secondary text-[12px] ">{d.division}</td>
+                <td className="py-2.5 px-3 text-right font-mono text-[12px] ">{d.releases}</td>
+                <td className="py-2.5 px-3 text-right font-mono text-[12px] ">{d.avgTAT}m</td>
+                <td className="py-2.5 px-3 text-right font-mono text-[12px] ">{d.sentiment}%</td>
+                <td className="py-2.5 px-3 text-right font-mono text-[12px] ">{d.crisisSLA}%</td>
+                <td className="py-2.5 px-3 text-right font-mono font-bold text-[12px]  ">{d.cpi}</td>
                 <td className="py-2.5 px-3 text-center">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       onSelectDistrict(d.id);
                     }}
-                    className="px-2.5 py-1 text-[11px] bg-action-primary text-content-inverse rounded hover:bg-action-primary-hover transition-colors"
+                    className="px-2.5 py-1 text-[12px] bg-action-primary text-content-inverse rounded hover:bg-action-primary-hover transition-colors"
                   >
                     View
                   </button>

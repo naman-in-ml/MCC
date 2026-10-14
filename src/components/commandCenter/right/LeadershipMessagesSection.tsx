@@ -11,7 +11,7 @@ export const LeadershipMessagesSection: React.FC = () => {
       <div className="flex items-center justify-between border-b border-borderLine-subtle pb-2.5">
         <div className="flex items-center gap-2">
           <MessageSquareText className="w-4 h-4 text-content-primary" />
-          <h4 className="text-xs font-bold text-content-primary">DG & Director Messages</h4>
+          <h4 className="text-sm font-bold text-content-primary">DG & Director Messages</h4>
         </div>
         <span className="text-[10px] font-mono font-medium px-1.5 py-0.5 bg-surface-secondary text-content-primary rounded border border-borderLine-standard">
           Official Directives
@@ -21,14 +21,14 @@ export const LeadershipMessagesSection: React.FC = () => {
       {/* Messages List */}
       <div className="space-y-3">
         {LEADERSHIP_MESSAGES.map((msg) => (
-          <div
+          <div 
             key={msg.id}
             className="p-3 rounded border border-borderLine-subtle bg-surface-secondary/50 hover:bg-surface-secondary transition-colors space-y-1.5 text-xs"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5">
                 <Award className="w-3.5 h-3.5 text-content-primary" />
-                <span className="font-bold text-content-primary">{msg.sender}</span>
+                <span className="font-bold text-[14px] text-content-primary">{msg.sender}</span>
               </div>
               <span
                 className={`text-[10px] font-mono px-1.5 py-0.5 rounded border font-semibold ${
@@ -41,7 +41,7 @@ export const LeadershipMessagesSection: React.FC = () => {
               </span>
             </div>
 
-            <div className="text-[11px] font-semibold text-content-primary">
+            <div className="text-[13px] font-semibold text-content-primary">
               {msg.title}
             </div>
 

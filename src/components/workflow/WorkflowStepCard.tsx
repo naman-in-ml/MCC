@@ -51,7 +51,7 @@ export const WorkflowStepCard: React.FC<WorkflowStepCardProps> = ({
       </div>
 
       <div className="space-y-1 my-1">
-        <h4 className="text-s font-bold text-content-primary line-clamp-1">{item.title}</h4>
+        <h4 className="text-s font-bold text-content-primary line-clamp-2">{item.title}</h4>
         <p className="text-[11px] text-content-secondary line-clamp-2 leading-relaxed">
           {item.description}
         </p>

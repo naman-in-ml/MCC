@@ -9,8 +9,8 @@ export const DistrictSubHeadSelector: React.FC = () => {
 
   return (
     <div className="space-y-1.5">
-      <div className="flex items-center justify-between text-xs">
-        <span className="font-semibold text-content-primary flex items-center gap-1.5">
+      <div className="flex items-center justify-between text-sm ">
+        <span className="font-bold text-content-primary flex items-center gap-1.5">
           <MapPin className="w-3.5 h-3.5" />
           <span>District Sub-heads (36 Districts Network)</span>
         </span>

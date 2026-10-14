@@ -51,7 +51,7 @@ export const TVChannelDataSection: React.FC = () => {
       <div className="flex items-center justify-between border-b border-borderLine-subtle pb-2.5">
         <div className="flex items-center gap-2">
           <Tv className="w-4 h-4 text-content-primary" />
-          <h4 className="text-xs font-bold text-content-primary">2. TV Channel Broadcast Data</h4>
+          <h4 className="text-sm font-bold text-content-primary">2. TV Channel Broadcast Data</h4>
         </div>
         <span className="text-[10px] font-mono font-medium px-1.5 py-0.5 bg-surface-secondary text-content-secondary rounded">
           4 State Channels

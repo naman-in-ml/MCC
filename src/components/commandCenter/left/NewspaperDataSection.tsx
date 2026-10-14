@@ -29,7 +29,7 @@ export const NewspaperDataSection: React.FC = () => {
           type: 'bar',
           stack: 'total',
           data: NEWSPAPER_DATA.map((n) => n.positive).reverse(),
-          itemStyle: { color: '#202124' },
+          itemStyle: { color: '#399e72' },
           barWidth: '50%',
         },
         {
@@ -37,14 +37,14 @@ export const NewspaperDataSection: React.FC = () => {
           type: 'bar',
           stack: 'total',
           data: NEWSPAPER_DATA.map((n) => n.neutral).reverse(),
-          itemStyle: { color: '#80868B' },
+          itemStyle: { color: '#b0b0af' },
         },
         {
           name: 'Negative %',
           type: 'bar',
           stack: 'total',
           data: NEWSPAPER_DATA.map((n) => n.negative).reverse(),
-          itemStyle: { color: '#DADCE0' },
+          itemStyle: { color: '#f37777' },
         },
       ],
     };
@@ -56,7 +56,7 @@ export const NewspaperDataSection: React.FC = () => {
       <div className="flex items-center justify-between border-b border-borderLine-subtle pb-2.5">
         <div className="flex items-center gap-2">
           <Newspaper className="w-4 h-4 text-content-primary" />
-          <h4 className="text-xs font-bold text-content-primary">1. Newspaper Data & Print Clippings</h4>
+          <h4 className="text-sm font-bold text-content-primary">1. Newspaper Data & Print Clippings</h4>
         </div>
         <span className="text-[10px] font-mono font-medium px-1.5 py-0.5 bg-surface-secondary text-content-secondary rounded">
           18 Dailies

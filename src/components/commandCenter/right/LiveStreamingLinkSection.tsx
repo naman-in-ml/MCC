@@ -18,7 +18,7 @@ export const LiveStreamingLinkSection: React.FC = () => {
       <div className="flex items-center justify-between border-b border-borderLine-subtle pb-2.5">
         <div className="flex items-center gap-2">
           <Video className="w-4 h-4 text-content-primary" />
-          <h4 className="text-xs font-bold text-content-primary">Live Streaming Link & Broadcast</h4>
+          <h4 className="text-sm font-bold text-content-primary">Live Streaming Link & Broadcast</h4>
         </div>
         <span className="text-[10px] font-mono font-medium px-1.5 py-0.5 bg-surface-secondary text-content-primary rounded border border-borderLine-standard flex items-center gap-1">
           <span className="w-1.5 h-1.5 rounded-full bg-content-primary animate-ping"></span>

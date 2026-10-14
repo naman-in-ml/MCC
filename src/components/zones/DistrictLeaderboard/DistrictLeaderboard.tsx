@@ -33,7 +33,7 @@ export const DistrictLeaderboard: React.FC = () => {
     <div className="bg-surface border border-borderLine-standard rounded-md flex flex-col">
       {/* Header and Sub-tabs */}
       <div className="px-4 py-3 border-b border-borderLine-subtle">
-        <h3 className="text-sm font-semibold text-content-primary mb-2">
+        <h3 className="text-xl font-bold text-content-primary mb-2">
           District Performance & Leaderboard
         </h3>
         <LeaderboardTabs activeTab={activeTab} onTabChange={setActiveTab} />
