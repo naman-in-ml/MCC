@@ -43,14 +43,14 @@ export const DistrictTable: React.FC<DistrictTableProps> = ({
                     : 'hover:bg-surface-secondary'
                 }`}
               >
-                <td className="py-2.5 px-3 font-mono text-content-muted text-[12px] ">{d.rank}</td>
-                <td className="py-2.5 px-3 font-mono text-[12px] ">{d.name}</td>
-                <td className="py-2.5 px-3 text-content-secondary text-[12px] ">{d.division}</td>
-                <td className="py-2.5 px-3 text-right font-mono text-[12px] ">{d.releases}</td>
-                <td className="py-2.5 px-3 text-right font-mono text-[12px] ">{d.avgTAT}m</td>
-                <td className="py-2.5 px-3 text-right font-mono text-[12px] ">{d.sentiment}%</td>
-                <td className="py-2.5 px-3 text-right font-mono text-[12px] ">{d.crisisSLA}%</td>
-                <td className="py-2.5 px-3 text-right font-mono font-bold text-[12px]  ">{d.cpi}</td>
+                <td className="py-2.5 px-3 font-mono text-content-muted text-[12px]">{d.rank}</td>
+                <td className="py-2.5 px-3 font-mono text-[12px]">{d.name}</td>
+                <td className="py-2.5 px-3 text-content-secondary text-[12px]">{d.division}</td>
+                <td className="py-2.5 px-3 text-right font-mono text-[12px]">{d.releases}</td>
+                <td className="py-2.5 px-3 text-right font-mono text-[12px]">{d.avgTAT}m</td>
+                <td className="py-2.5 px-3 text-right font-mono text-[12px]">{d.sentiment}%</td>
+                <td className="py-2.5 px-3 text-right font-mono text-[12px]">{d.crisisSLA}%</td>
+                <td className="py-2.5 px-3 text-right font-mono font-bold text-[12px]">{d.cpi}</td>
                 <td className="py-2.5 px-3 text-center">
                   <button
                     onClick={(e) => {
