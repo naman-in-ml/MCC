@@ -25,24 +25,24 @@ export const WorkflowStepCard: React.FC<WorkflowStepCardProps> = ({
       }`}
     >
       <div className="flex items-center justify-between gap-2 mb-2">
-        <span className="font-mono text-[11px] font-bold text-content-primary px-1.5 py-0.5 bg-surface-secondary rounded border border-borderLine-subtle">
+        <span className="font-mono text-[12px] font-bold text-content-primary px-1.5 py-0.5 bg-surface-secondary rounded border border-borderLine-subtle">
           {item.step}
         </span>
-        <div className="flex items-center gap-1 text-[11px]">
+        <div className="flex items-center gap-1 text-[14px]">
           {item.status === 'Completed' && (
-            <span className="flex items-center gap-1 text-content-primary font-medium">
+            <span className="flex items-center gap-1 text-green-600 text-content-primary font-medium">
               <CheckCircle2 className="w-3.5 h-3.5" />
               <span>Done</span>
             </span>
           )}
           {item.status === 'In Progress' && (
-            <span className="flex items-center gap-1 text-content-primary font-semibold">
+            <span className="flex items-center text-yellow-600 gap-1 text-content-primary font-semibold">
               <Clock className="w-3.5 h-3.5 animate-pulse" />
               <span>Active</span>
             </span>
           )}
           {item.status === 'Pending' && (
-            <span className="flex items-center gap-1 text-content-muted">
+            <span className="flex items-center gap-1 text-red-600 text-content-muted">
               <AlertCircle className="w-3.5 h-3.5" />
               <span>Pending</span>
             </span>
@@ -51,7 +51,7 @@ export const WorkflowStepCard: React.FC<WorkflowStepCardProps> = ({
       </div>
 
       <div className="space-y-1 my-1">
-        <h4 className="text-xs font-bold text-content-primary line-clamp-1">{item.title}</h4>
+        <h4 className="text-s font-bold text-content-primary line-clamp-1">{item.title}</h4>
         <p className="text-[11px] text-content-secondary line-clamp-2 leading-relaxed">
           {item.description}
         </p>

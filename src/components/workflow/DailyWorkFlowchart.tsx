@@ -19,10 +19,10 @@ export const DailyWorkFlowchart: React.FC = () => {
       <div className="px-4 py-3 border-b border-borderLine-subtle flex items-center justify-between flex-wrap gap-2">
         <div className="flex items-center gap-2">
           <GitBranch className="w-4 h-4 text-content-primary" />
-          <h3 className="text-sm font-semibold text-content-primary">
+          <h3 className="text-xl font-bold text-content-primary">
             Webportals — Daily Operations Workflow
           </h3>
-          <span className="text-[11px] font-mono px-2 py-0.5 bg-surface-secondary text-content-secondary rounded border border-borderLine-standard">
+          <span className="text-[13px] font-semibold px-2 py-0.5 bg-surface-secondary text-content-secondary rounded border border-borderLine-standard">
             24h Life Cycle
           </span>
         </div>
