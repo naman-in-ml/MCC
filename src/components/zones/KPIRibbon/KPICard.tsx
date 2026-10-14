@@ -11,6 +11,7 @@ export interface KPICardProps {
   targetText: string;
   trendDirection?: 'up' | 'down';
   trendValue: string;
+  positiveTrend?: boolean;
 }
 
 export const KPICard: React.FC<KPICardProps> = ({
@@ -21,14 +22,14 @@ export const KPICard: React.FC<KPICardProps> = ({
   targetText,
   trendDirection,
   trendValue,
+  positiveTrend = true,
 }) => {
   return (
     <div className="bg-surface border border-borderLine-standard rounded-md p-4 flex flex-col justify-between">
       <div className="flex items-center justify-between text-content-secondary mb-2">
         <div className="flex items-center gap-2">
           <Icon className="w-4 h-4 text-content-primary" />
-          <span className="text-sm
-           font-medium text-content-primary">{title}</span>
+          <span className="text-sm font-medium text-content-primary">{title}</span>
         </div>
       </div>
       <div>
@@ -38,8 +39,12 @@ export const KPICard: React.FC<KPICardProps> = ({
         </div>
         <div className="flex items-center justify-between text-xs mt-2 text-content-muted">
           <span>{targetText}</span>
-          <div className="flex items-center gap-0.5 text-content-secondary text-green-500 font-medium">
-            {trendDirection === 'up' && <ArrowUp className="w-3.5 h-3.5 " />}
+          <div
+            className={`flex items-center gap-0.5 font-medium ${
+              positiveTrend ? 'text-green-600' : 'text-red-600'
+            }`}
+          >
+            {trendDirection === 'up' && <ArrowUp className="w-3.5 h-3.5" />}
             {trendDirection === 'down' && <ArrowDown className="w-3.5 h-3.5" />}
             <span>{trendValue}</span>
           </div>
