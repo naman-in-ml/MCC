@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState } from 'react';
 import { useDashboardStore } from '@/stores/dashboardStore';
+import { useTranslation } from '@/lib/translations';
 import { LeaderboardTabs, LeaderboardTab } from './LeaderboardTabs';
 import { DistrictPerformanceChart } from './DistrictPerformanceChart';
 import { DistrictSearchBar } from './DistrictSearchBar';
@@ -9,6 +10,7 @@ import { DistrictTable } from './DistrictTable';
 
 export const DistrictLeaderboard: React.FC = () => {
   const {
+    language,
     districts,
     selectedDistrictId,
     setSelectedDistrictId,
@@ -16,6 +18,8 @@ export const DistrictLeaderboard: React.FC = () => {
     searchDistrict,
     setSearchDistrict,
   } = useDashboardStore();
+
+  const t = useTranslation(language);
 
   const [activeTab, setActiveTab] = useState<LeaderboardTab>('cpi');
 
