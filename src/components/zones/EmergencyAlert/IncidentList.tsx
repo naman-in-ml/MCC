@@ -12,6 +12,7 @@ interface IncidentListProps {
   onViewAll?: () => void;
 }
 
+
 export const IncidentList: React.FC<IncidentListProps> = ({
   incidents,
   onViewAll,

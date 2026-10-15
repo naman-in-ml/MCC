@@ -32,6 +32,7 @@ export const AllAlertsCrisisScreen: React.FC = () => {
   const t = useTranslation(language);
 
   // Search & Filter States
+  const activeIncidents = useMemo(() => incidents.filter(i => !i.isConfirmedFake && !i.authRequestSent).length, [incidents]);
   const [searchQuery, setSearchQuery] = useState('');
   const [severityFilter, setSeverityFilter] = useState<'All' | 'High' | 'Medium' | 'Low'>('All');
   const [statusFilter, setStatusFilter] = useState<'All' | 'Pending' | 'AuthSent' | 'ConfirmedFake'>('All');

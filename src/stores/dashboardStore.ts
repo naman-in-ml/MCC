@@ -86,19 +86,40 @@ export const useDashboardStore = create<DashboardStore>((set) => ({
   setSelectedIncidentId: (id) => set({ selectedIncidentId: id }),
 
   confirmRumorFake: (incidentId, notes) =>
-    set((state) => ({
-      incidents: state.incidents.map((inc) =>
+    set((state) => {
+      const updatedIncidents = state.incidents.map((inc) =>
         inc.id === incidentId
           ? {
-            ...inc,
-            authorized: true,
-            isConfirmedFake: true,
-            verificationStatus: 'Confirmed Fake',
-            debunkNotes: notes || 'Fact Check confirmed rumor is fake. Counter-rebuttal dispatched to media.',
-          }
+              ...inc,
+              authorized: true,
+              isConfirmedFake: true,
+              verificationStatus: 'Confirmed Fake',
+              debunkNotes: notes || 'Fact Check confirmed rumor is fake. Counter-rebuttal dispatched to media.',
+            }
           : inc
-      ),
-    })),
+      );
+      const newIncident = {
+        id: `INC-${Date.now()}`,
+        summary: 'New incident after fake confirmation',
+        district: 'New District',
+        division: 'New Division',
+        source: 'Social Media',
+        severity: 'Medium',
+        reportedTime: new Date().toLocaleString(),
+        verificationStatus: 'Pending',
+        isConfirmedFake: false,
+        authRequestSent: false,
+        slaMinutes: 60,
+        slaRemaining: '60m',
+        category: 'General',
+        viralReach: null,
+        fullDescription: '',
+        counterStatement: '',
+        dioOfficer: null,
+        dioPhone: null,
+      };
+      return { incidents: [newIncident, ...updatedIncidents] };
+    }),
 
   sendAuthRequest: (incidentId, notes) =>
     set((state) => ({
