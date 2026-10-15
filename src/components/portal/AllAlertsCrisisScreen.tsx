@@ -71,7 +71,7 @@ export const AllAlertsCrisisScreen: React.FC = () => {
         incident.summary.toLowerCase().includes(q) ||
         incident.district.toLowerCase().includes(q) ||
         incident.source.toLowerCase().includes(q) ||
-        (incident.category && incident.category.toLowerCase().includes(q));
+        Boolean(incident.category && incident.category.toLowerCase().includes(q));
 
       // Severity
       const matchesSeverity = severityFilter === 'All' || incident.severity === severityFilter;
@@ -116,8 +116,10 @@ export const AllAlertsCrisisScreen: React.FC = () => {
     if (e) e.preventDefault();
     if (!selectedIncident) return;
 
-    const notes = authNotes || `Priority: ${authUrgency}. Immediate field investigation requested for ${selectedIncident.district}.`;
-    sendAuthRequest(selectedIncident.id, notes, authUrgency);
+    const notes = authNotes
+      ? `[Priority: ${authUrgency}] ${authNotes}`
+      : `Priority: ${authUrgency}. Immediate field investigation requested for ${selectedIncident.district}.`;
+    sendAuthRequest(selectedIncident.id, notes);
     setShowAuthForm(false);
     setAuthNotes('');
     showToast(

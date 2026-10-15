@@ -35,6 +35,14 @@ export interface IncidentData {
   authRequestSent?: boolean;
   authRequestTimestamp?: string;
   authRequestNotes?: string;
+  category?: string;
+  division?: string;
+  viralReach?: string | null;
+  reportedTime?: string;
+  fullDescription?: string;
+  dioOfficer?: string | null;
+  dioPhone?: string | null;
+  counterStatement?: string;
 }
 
 export interface OCRRecord {
