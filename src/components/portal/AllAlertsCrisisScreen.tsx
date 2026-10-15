@@ -3,7 +3,6 @@
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { useDashboardStore } from '@/stores/dashboardStore';
-import { useTranslation } from '@/lib/translations';
 import {
   ShieldAlert,
   AlertTriangle,
@@ -26,13 +25,9 @@ export const AllAlertsCrisisScreen: React.FC = () => {
     setSelectedIncidentId,
     confirmRumorFake,
     sendAuthRequest,
-    language,
   } = useDashboardStore();
 
-  const t = useTranslation(language);
-
   // Search & Filter States
-  const activeIncidents = useMemo(() => incidents.filter(i => !i.isConfirmedFake && !i.authRequestSent).length, [incidents]);
   const [searchQuery, setSearchQuery] = useState('');
   const [severityFilter, setSeverityFilter] = useState<'All' | 'High' | 'Medium' | 'Low'>('All');
   const [statusFilter, setStatusFilter] = useState<'All' | 'Pending' | 'AuthSent' | 'ConfirmedFake'>('All');
@@ -329,7 +324,7 @@ export const AllAlertsCrisisScreen: React.FC = () => {
             ].map((st) => (
               <button
                 key={st.id}
-                onClick={() => setStatusFilter(st.id as any)}
+                onClick={() => setStatusFilter(st.id as 'All' | 'Pending' | 'AuthSent' | 'ConfirmedFake')}
                 className={`px-2.5 py-1 rounded text-[11px] font-medium transition-colors ${
                   statusFilter === st.id
                     ? 'bg-gov-blue text-white font-bold'
@@ -718,7 +713,7 @@ export const AllAlertsCrisisScreen: React.FC = () => {
                           </label>
                           <select
                             value={authUrgency}
-                            onChange={(e) => setAuthUrgency(e.target.value as any)}
+                            onChange={(e) => setAuthUrgency(e.target.value as 'Urgent' | 'High' | 'Standard')}
                             className="w-full px-2 py-1 text-xs bg-white border border-blue-300 rounded text-slate-800 font-medium focus:outline-none focus:ring-1 focus:ring-gov-blue"
                           >
                             <option value="Urgent">Urgent (30 Min Mandate)</option>
