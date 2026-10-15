@@ -30,6 +30,11 @@ export interface IncidentData {
   slaMinutes: number;
   district: string;
   authorized: boolean;
+  isConfirmedFake?: boolean;
+  debunkNotes?: string;
+  authRequestSent?: boolean;
+  authRequestTimestamp?: string;
+  authRequestNotes?: string;
 }
 
 export interface OCRRecord {

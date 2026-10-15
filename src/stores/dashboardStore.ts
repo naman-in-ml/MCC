@@ -23,6 +23,10 @@ interface DashboardStore {
   selectedDistrictId: string;
   setSelectedDistrictId: (id: string) => void;
 
+  // Selected Incident for Crisis Operations
+  selectedIncidentId: string;
+  setSelectedIncidentId: (id: string) => void;
+
   // Selected Department for Department-Wise Data
   selectedDepartmentId: string;
   setSelectedDepartmentId: (id: string) => void;
@@ -35,13 +39,15 @@ interface DashboardStore {
   districts: DistrictData[];
   incidents: IncidentData[];
   ocrFeed: OCRRecord[];
-  
+
   // Actions
   authorizeRebuttal: (incidentId: string) => void;
+  confirmRumorFake: (incidentId: string, notes?: string) => void;
+  sendAuthRequest: (incidentId: string, notes?: string) => void;
   insertSampleOCR: (record: OCRRecord) => void;
   setSentimentFilter: (sentiment: string) => void;
   sentimentFilter: string;
-  
+
   // Sidebar collapsed state
   sidebarCollapsed: boolean;
   setSidebarCollapsed: (collapsed: boolean) => void;
@@ -75,6 +81,39 @@ export const useDashboardStore = create<DashboardStore>((set) => ({
   incidents: INITIAL_INCIDENTS,
   ocrFeed: INITIAL_OCR_FEED,
   sentimentFilter: 'All',
+
+  selectedIncidentId: 'INC-2025-0417',
+  setSelectedIncidentId: (id) => set({ selectedIncidentId: id }),
+
+  confirmRumorFake: (incidentId, notes) =>
+    set((state) => ({
+      incidents: state.incidents.map((inc) =>
+        inc.id === incidentId
+          ? {
+            ...inc,
+            authorized: true,
+            isConfirmedFake: true,
+            verificationStatus: 'Confirmed Fake',
+            debunkNotes: notes || 'Fact Check confirmed rumor is fake. Counter-rebuttal dispatched to media.',
+          }
+          : inc
+      ),
+    })),
+
+  sendAuthRequest: (incidentId, notes) =>
+    set((state) => ({
+      incidents: state.incidents.map((inc) =>
+        inc.id === incidentId
+          ? {
+            ...inc,
+            authRequestSent: true,
+            verificationStatus: 'Auth Request Sent',
+            authRequestTimestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            authRequestNotes: notes || 'Field verification requested from District Collector & DIO desk.',
+          }
+          : inc
+      ),
+    })),
 
   authorizeRebuttal: (incidentId) =>
     set((state) => ({

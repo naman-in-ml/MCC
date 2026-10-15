@@ -1,6 +1,8 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useDashboardStore } from '@/stores/dashboardStore';
 import { useTranslation } from '@/lib/translations';
 import { ShieldAlert } from 'lucide-react';
@@ -8,6 +10,7 @@ import { PrimaryIncidentCard } from './PrimaryIncidentCard';
 import { IncidentList } from './IncidentList';
 
 export const EmergencyAlert: React.FC = () => {
+  const router = useRouter();
   const { incidents, authorizeRebuttal, userRole, language } = useDashboardStore();
   const t = useTranslation(language);
 
@@ -41,10 +44,14 @@ export const EmergencyAlert: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="flex items-center gap-1.5 text-[11px] font-bold px-2 py-0.5 bg-white text-red-700 rounded-full shadow-xs">
+          <Link
+            href="/crisis"
+            className="flex items-center gap-1.5 text-[11px] font-bold px-2 py-0.5 bg-white text-red-700 hover:bg-red-50 rounded-full shadow-xs transition-colors cursor-pointer"
+            title="View All Alerts & Crisis"
+          >
             <span className="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
             <span>{incidents.length} {t.zone5.pendingCount}</span>
-          </span>
+          </Link>
         </div>
       </div>
 
@@ -59,7 +66,10 @@ export const EmergencyAlert: React.FC = () => {
         )}
 
         {/* Secondary Rumor & Incident Feeds */}
-        <IncidentList incidents={secondaryIncidents} />
+        <IncidentList
+          incidents={secondaryIncidents}
+          onViewAll={() => router.push('/crisis')}
+        />
       </div>
     </div>
   );

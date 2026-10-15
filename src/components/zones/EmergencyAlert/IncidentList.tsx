@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { ArrowRight, Clock } from 'lucide-react';
 import { IncidentData } from '@/types/dashboard';
 import { useDashboardStore } from '@/stores/dashboardStore';
@@ -15,8 +16,14 @@ export const IncidentList: React.FC<IncidentListProps> = ({
   incidents,
   onViewAll,
 }) => {
-  const { language } = useDashboardStore();
+  const router = useRouter();
+  const { language, setSelectedIncidentId } = useDashboardStore();
   const t = useTranslation(language);
+
+  const handleIncidentClick = (id: string) => {
+    setSelectedIncidentId(id);
+    router.push('/crisis');
+  };
 
   return (
     <div className="space-y-2">
@@ -33,7 +40,8 @@ export const IncidentList: React.FC<IncidentListProps> = ({
           return (
             <div
               key={incident.id}
-              className="p-2.5 flex items-center justify-between hover:bg-slate-50 transition-colors text-xs gap-2"
+              onClick={() => handleIncidentClick(incident.id)}
+              className="p-2.5 flex items-center justify-between hover:bg-slate-50 transition-colors text-xs gap-2 cursor-pointer group"
             >
               <div className="space-y-0.5 min-w-0">
                 <div className="flex items-center gap-2">
