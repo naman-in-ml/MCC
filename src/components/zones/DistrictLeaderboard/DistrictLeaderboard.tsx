@@ -30,12 +30,26 @@ export const DistrictLeaderboard: React.FC = () => {
   }, [districts, selectedDivision, searchDistrict]);
 
   return (
+<<<<<<< HEAD
     <div className="bg-surface border border-borderLine-standard rounded-md flex flex-col">
       {/* Header and Sub-tabs */}
       <div className="px-4 py-3 border-b border-borderLine-subtle">
         <h3 className="text-xl font-bold text-content-primary mb-2">
           District Performance & Leaderboard
         </h3>
+=======
+    <div className="bg-surface border border-slate-200 rounded-lg flex flex-col shadow-xs overflow-hidden">
+      {/* Header and Sub-tabs */}
+      <div className="px-4 py-3 border-b border-slate-200 bg-surface">
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-sm font-bold text-gov-primary tracking-tight">
+            {t.zone2.title}
+          </h3>
+          <span className="text-[11px] text-slate-500 font-medium hidden sm:inline">
+            {t.zone2.subtitle}
+          </span>
+        </div>
+>>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
         <LeaderboardTabs activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
 
