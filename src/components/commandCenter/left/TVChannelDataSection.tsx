@@ -74,16 +74,11 @@ export const TVChannelDataSection: React.FC = () => {
       {/* Title */}
       <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
         <div className="flex items-center gap-2">
-<<<<<<< HEAD
-          <Tv className="w-4 h-4 text-content-primary" />
-          <h4 className="text-sm font-bold text-content-primary">2. TV Channel Broadcast Data</h4>
-=======
           <MaterialIcon name="tv" size="md" className="text-gov-primary" />
           <div>
             <h4 className="text-xs font-bold text-gov-primary">TV Broadcast Monitoring</h4>
             <p className="text-[10px] text-slate-500">Regional Electronic Media Surveillance</p>
           </div>
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
         </div>
         <span className="text-[10px] font-mono font-medium px-2 py-0.5 bg-slate-100 text-slate-700 rounded border border-slate-200">
           4 State Channels

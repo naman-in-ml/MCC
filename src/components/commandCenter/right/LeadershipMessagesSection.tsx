@@ -10,16 +10,11 @@ export const LeadershipMessagesSection: React.FC = () => {
       {/* Title */}
       <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
         <div className="flex items-center gap-2">
-<<<<<<< HEAD
-          <MessageSquareText className="w-4 h-4 text-content-primary" />
-          <h4 className="text-sm font-bold text-content-primary">DG & Director Messages</h4>
-=======
           <MaterialIcon name="speaker_notes" size="sm" className="text-gov-primary" />
           <div>
             <h4 className="text-xs font-bold text-gov-primary">DG & Director Messages</h4>
             <p className="text-[10px] text-slate-500">Executive Bulletins & Statewide Directives</p>
           </div>
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
         </div>
         <span className="text-[10px] font-mono font-medium px-2 py-0.5 bg-slate-100 text-slate-700 rounded border border-slate-200">
           Official Feed
@@ -27,18 +22,6 @@ export const LeadershipMessagesSection: React.FC = () => {
       </div>
 
       {/* Messages List */}
-<<<<<<< HEAD
-      <div className="space-y-3">
-        {LEADERSHIP_MESSAGES.map((msg) => (
-          <div 
-            key={msg.id}
-            className="p-3 rounded border border-borderLine-subtle bg-surface-secondary/50 hover:bg-surface-secondary transition-colors space-y-1.5 text-xs"
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1.5">
-                <Award className="w-3.5 h-3.5 text-content-primary" />
-                <span className="font-bold text-[14px] text-content-primary">{msg.sender}</span>
-=======
       <div className="space-y-2.5">
         {LEADERSHIP_MESSAGES.map((msg) => {
           let badgeStyle = 'bg-slate-100 text-slate-700 border-slate-200';
@@ -62,18 +45,11 @@ export const LeadershipMessagesSection: React.FC = () => {
                   <span className="w-1.5 h-1.5 rounded-full bg-current opacity-80" />
                   <span>{msg.priority}</span>
                 </span>
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
               </div>
 
-<<<<<<< HEAD
-            <div className="text-[13px] font-semibold text-content-primary">
-              {msg.title}
-            </div>
-=======
               <div className="text-[11px] font-bold text-slate-900">
                 {msg.title}
               </div>
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
 
               <p className="text-[11px] text-slate-600 leading-relaxed">
                 {msg.content}

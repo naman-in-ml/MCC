@@ -24,15 +24,6 @@ export const DistrictSubHeadSelector: React.FC = () => {
   }, [districts, selectedDivisionTab, searchQuery]);
 
   return (
-<<<<<<< HEAD
-    <div className="space-y-1.5">
-      <div className="flex items-center justify-between text-sm ">
-        <span className="font-bold text-content-primary flex items-center gap-1.5">
-          <MapPin className="w-3.5 h-3.5" />
-          <span>District Sub-heads (36 Districts Network)</span>
-        </span>
-        <span className="text-[11px] text-content-muted">Click to switch sub-head</span>
-=======
     <div className="bg-surface rounded-lg border border-slate-200 p-3 space-y-2.5 shadow-2xs">
       {/* Header and Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-2">
@@ -57,7 +48,6 @@ export const DistrictSubHeadSelector: React.FC = () => {
             className="w-full pl-6 pr-2 py-1 text-xs border border-slate-200 rounded bg-slate-50 focus:bg-white focus:outline-none focus:border-gov-blue text-slate-800"
           />
         </div>
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
       </div>
 
       {/* Division Tabs */}

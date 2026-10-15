@@ -1,13 +1,9 @@
 'use client';
 
 import React from 'react';
-<<<<<<< HEAD
 import { useRouter } from 'next/navigation';
-import { ArrowRight, Clock } from 'lucide-react';
-=======
 import Link from 'next/link';
 import { MaterialIcon } from '@/components/shared/MaterialIcon';
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
 import { IncidentData } from '@/types/dashboard';
 import { useDashboardStore } from '@/stores/dashboardStore';
 import { useTranslation } from '@/lib/translations';

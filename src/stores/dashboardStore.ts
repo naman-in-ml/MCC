@@ -88,21 +88,15 @@ interface DashboardStore {
   districts: DistrictData[];
   incidents: IncidentData[];
   ocrFeed: OCRRecord[];
-<<<<<<< HEAD
+  sentimentFilter: string;
+  setSentimentFilter: (sentiment: string) => void;
+  isLoadingData: boolean;
 
   // Actions
   authorizeRebuttal: (incidentId: string) => void;
   confirmRumorFake: (incidentId: string, notes?: string) => void;
   sendAuthRequest: (incidentId: string, notes?: string, urgency?: string) => void;
   insertSampleOCR: (record: OCRRecord) => void;
-  setSentimentFilter: (sentiment: string) => void;
-  sentimentFilter: string;
-
-  // Sidebar collapsed state
-=======
-  sentimentFilter: string;
-  setSentimentFilter: (sentiment: string) => void;
-  isLoadingData: boolean;
 
   // Toast Notification
   toast: ToastNotification | null;
@@ -124,9 +118,6 @@ interface DashboardStore {
     source?: string,
     sentiment?: 'Positive' | 'Neutral' | 'Negative'
   ) => Promise<void>;
-
-  // Sidebar collapsed & mobile drawer states
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
   sidebarCollapsed: boolean;
   setSidebarCollapsed: (collapsed: boolean) => void;
   mobileMenuOpen: boolean;
@@ -260,8 +251,7 @@ export const useDashboardStore = create<DashboardStore>((set, get) => ({
   toast: null,
   setToast: (toast) => set({ toast }),
 
-<<<<<<< HEAD
-  selectedIncidentId: 'INC-2025-0417',
+  selectedIncidentId: 'INC-2026-PALGHAR-01',
   setSelectedIncidentId: (id) => set({ selectedIncidentId: id }),
 
   confirmRumorFake: (incidentId, notes) =>
@@ -301,12 +291,16 @@ export const useDashboardStore = create<DashboardStore>((set, get) => ({
         inc.id === incidentId ? { ...inc, authorized: true, verificationStatus: 'Authorized Rebuttal' } : inc
       ),
     })),
-=======
+
+  insertSampleOCR: (record) =>
+    set((state) => ({
+      ocrFeed: [record, ...state.ocrFeed],
+    })),
+
   setSentimentFilter: (sentimentFilter) => {
     set({ sentimentFilter });
     get().fetchOcrFeed();
   },
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
 
   fetchOverviewMetrics: async () => {
     const { userRole, currentUser, selectedDivision } = get();

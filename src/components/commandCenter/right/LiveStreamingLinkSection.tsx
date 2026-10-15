@@ -38,16 +38,11 @@ export const LiveStreamingLinkSection: React.FC = () => {
       {/* Title */}
       <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
         <div className="flex items-center gap-2">
-<<<<<<< HEAD
-          <Video className="w-4 h-4 text-content-primary" />
-          <h4 className="text-sm font-bold text-content-primary">Live Streaming Link & Broadcast</h4>
-=======
           <MaterialIcon name="videocam" size="md" className="text-gov-primary" />
           <div>
             <h4 className="text-xs font-bold text-gov-primary">Live Streaming Link & Broadcast</h4>
             <p className="text-[10px] text-slate-500">DGIPR High-Definition Telecast Relay</p>
           </div>
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
         </div>
         <span className="text-[10px] font-mono font-medium px-2 py-0.5 bg-red-100 text-red-800 rounded border border-red-200 flex items-center gap-1.5 font-bold">
           <span className="w-1.5 h-1.5 rounded-full bg-red-600"></span>

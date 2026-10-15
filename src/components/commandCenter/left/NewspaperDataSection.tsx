@@ -44,35 +44,22 @@ export const NewspaperDataSection: React.FC = () => {
           type: 'bar',
           stack: 'total',
           data: NEWSPAPER_DATA.map((n) => n.positive).reverse(),
-<<<<<<< HEAD
-          itemStyle: { color: '#399e72' },
-          barWidth: '50%',
-=======
           itemStyle: { color: '#15803D' }, // Semantic Emerald
           barWidth: '45%',
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
         },
         {
           name: 'Neutral',
           type: 'bar',
           stack: 'total',
           data: NEWSPAPER_DATA.map((n) => n.neutral).reverse(),
-<<<<<<< HEAD
-          itemStyle: { color: '#b0b0af' },
-=======
           itemStyle: { color: '#94A3B8' }, // Semantic Slate
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
         },
         {
           name: 'Negative',
           type: 'bar',
           stack: 'total',
           data: NEWSPAPER_DATA.map((n) => n.negative).reverse(),
-<<<<<<< HEAD
-          itemStyle: { color: '#f37777' },
-=======
           itemStyle: { color: '#DC2626' }, // Semantic Red
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
         },
       ],
     };
@@ -83,16 +70,11 @@ export const NewspaperDataSection: React.FC = () => {
       {/* Title */}
       <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
         <div className="flex items-center gap-2">
-<<<<<<< HEAD
-          <Newspaper className="w-4 h-4 text-content-primary" />
-          <h4 className="text-sm font-bold text-content-primary">1. Newspaper Data & Print Clippings</h4>
-=======
           <MaterialIcon name="newspaper" size="md" className="text-gov-primary" />
           <div>
             <h4 className="text-xs font-bold text-gov-primary">Newspaper Data & Print Clippings</h4>
             <p className="text-[10px] text-slate-500">Regional & Statewide Dailies</p>
           </div>
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
         </div>
         <span className="text-[10px] font-mono font-medium px-2 py-0.5 bg-slate-100 text-slate-700 rounded border border-slate-200">
           18 Dailies Tracked

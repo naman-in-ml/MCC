@@ -87,21 +87,12 @@ export const DailyWorkFlowchart: React.FC = () => {
     <div className="bg-surface border border-borderLine-standard rounded-md flex flex-col shadow-xs">
       {/* Header */}
       <div className="px-4 py-3 border-b border-borderLine-subtle flex items-center justify-between flex-wrap gap-2">
-<<<<<<< HEAD
-        <div className="flex items-center gap-2">
-          <GitBranch className="w-4 h-4 text-content-primary" />
-          <h3 className="text-xl font-bold text-content-primary">
-            Webportals — Daily Operations Workflow
-          </h3>
-          <span className="text-[13px] font-semibold px-2 py-0.5 bg-surface-secondary text-content-secondary rounded border border-borderLine-standard">
-=======
         <div className="flex items-center gap-2 flex-wrap">
           <MaterialIcon name="alt_route" size="sm" className="text-content-primary" />
           <h3 className="text-xs font-bold text-content-primary">
             Webportals — Daily Operations Workflow
           </h3>
           <span className="text-[10px] font-mono px-2 py-0.5 bg-surface-secondary text-content-secondary rounded border border-borderLine-standard">
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
             24h Life Cycle
           </span>
           <div className="flex items-center gap-2 text-[11px] text-content-muted">

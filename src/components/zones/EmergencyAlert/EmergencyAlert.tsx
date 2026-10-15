@@ -10,12 +10,8 @@ import { PrimaryIncidentCard } from './PrimaryIncidentCard';
 import { IncidentList } from './IncidentList';
 
 export const EmergencyAlert: React.FC = () => {
-<<<<<<< HEAD
   const router = useRouter();
-  const { incidents, authorizeRebuttal, userRole, language } = useDashboardStore();
-=======
   const { incidents, authorizeRebuttalApi, userRole, language } = useDashboardStore();
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
   const t = useTranslation(language);
 
   const primaryIncident = incidents[0];
@@ -43,7 +39,6 @@ export const EmergencyAlert: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-2">
-<<<<<<< HEAD
           <Link
             href="/crisis"
             className="flex items-center gap-1.5 text-[11px] font-bold px-2 py-0.5 bg-white text-red-700 hover:bg-red-50 rounded-full shadow-xs transition-colors cursor-pointer"
@@ -52,14 +47,6 @@ export const EmergencyAlert: React.FC = () => {
             <span className="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
             <span>{incidents.length} {t.zone5.pendingCount}</span>
           </Link>
-=======
-          <span className="flex items-center gap-1.5 text-[11px] font-bold px-2 py-0.5 bg-white text-red-800 rounded-full shadow-2xs">
-            <span className="w-2 h-2 rounded-full bg-red-600"></span>
-            <span>
-              {incidents.length} {t.zone5.pendingCount}
-            </span>
-          </span>
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
         </div>
       </div>
 

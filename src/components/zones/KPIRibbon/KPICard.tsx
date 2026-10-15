@@ -24,26 +24,6 @@ export const KPICard: React.FC<KPICardProps> = ({
   trendValue,
   positiveTrend = true,
 }) => {
-<<<<<<< HEAD
-  return (
-    <div className="bg-surface border border-borderLine-standard rounded-md p-4 flex flex-col justify-between">
-      <div className="flex items-center justify-between text-content-secondary mb-2">
-        <div className="flex items-center gap-2">
-          <Icon className="w-4 h-4 text-content-primary" />
-          <span className="text-sm font-medium text-content-primary">{title}</span>
-        </div>
-      </div>
-      <div>
-        <div className="text-2xl font-bold tracking-tight text-content-primary">
-          {value}
-          {unit && <span className="text-sm font-normal text-content-secondary ml-1">{unit}</span>}
-        </div>
-        <div className="flex items-center justify-between text-xs mt-2 text-content-muted">
-          <span>{targetText}</span>
-          <div
-            className={`flex items-center gap-0.5 font-medium ${
-              positiveTrend ? 'text-green-600' : 'text-red-600'
-=======
   const isHealthy =
     (trendDirection === 'up' && positiveTrend) ||
     (trendDirection === 'down' && !positiveTrend);
@@ -61,9 +41,6 @@ export const KPICard: React.FC<KPICardProps> = ({
           <MaterialIcon name={icon} size="sm" className="text-slate-500" />
           <div>
             <div className="text-xs font-semibold text-slate-700 leading-tight">{title}</div>
-            {marathiTitle && (
-              <div className="text-[10px] text-slate-500 font-medium">{marathiTitle}</div>
-            )}
           </div>
         </div>
       </div>
@@ -89,7 +66,6 @@ export const KPICard: React.FC<KPICardProps> = ({
           <div
             className={`flex items-center gap-0.5 font-mono text-[10px] font-bold ${
               isHealthy ? 'text-emerald-700' : 'text-rose-600'
->>>>>>> d388acd7d9c13d47f4f611ec471fadaa4d324bd5
             }`}
           >
             {trendDirection === 'up' && <MaterialIcon name="arrow_upward" size="xs" />}
