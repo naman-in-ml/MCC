@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
+process.env.NEXT_IGNORE_INCORRECT_LOCKFILE = '1';
+
 const nextConfig = {
-  experimental: {
-    cpus: 1,
-  },
   eslint: {
     ignoreDuringBuilds: true,
   },
