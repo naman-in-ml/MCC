@@ -37,9 +37,9 @@ export const KeyMetricsTrends: React.FC = () => {
   }
 
   return (
-    <div className="bg-white border border-slate-200/90 rounded-xl shadow-sm overflow-hidden flex flex-col">
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200/80 flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-slate-200 bg-white flex items-center justify-between flex-wrap gap-2">
+      <div className="p-4 sm:p-5 border-b border-slate-100 bg-white flex items-center justify-between flex-wrap gap-2">
         <div className="flex items-center gap-2">
           <div className="p-1.5 rounded bg-blue-50 text-gov-blue">
             <MaterialIcon name="bar_chart" size="sm" />
@@ -64,7 +64,7 @@ export const KeyMetricsTrends: React.FC = () => {
       </div>
 
       {/* Chart Canvas */}
-      <div className="p-3">
+      <div className="p-4 sm:p-5">
         <DistrictPerformanceChart
           districts={districts}
           selectedDistrictId={selectedDistrictId}

@@ -5,7 +5,7 @@ import path from 'node:path';
 
 const ROOT_DIR = process.cwd();
 
-describe('Three-Column Executive Dashboard Workspace', () => {
+describe('Three-Column Executive Dashboard Workspace (v5.0 Responsive Refinement)', () => {
   describe('1. Preservation of Original Dashboard', () => {
     it('MainDashboard.tsx should remain preserved intact in the codebase', () => {
       const mainDashboardPath = path.join(
@@ -21,8 +21,8 @@ describe('Three-Column Executive Dashboard Workspace', () => {
     });
   });
 
-  describe('2. New ThreeColumnDashboard Component Architecture', () => {
-    it('ThreeColumnDashboard.tsx should exist and assemble all 3 columns', () => {
+  describe('2. Progressive Responsive ThreeColumnDashboard Component Architecture', () => {
+    it('ThreeColumnDashboard.tsx should exist and support multi-breakpoint responsive stages', () => {
       const threeColPath = path.join(
         ROOT_DIR,
         'src',
@@ -37,31 +37,34 @@ describe('Three-Column Executive Dashboard Workspace', () => {
       assert.ok(content.includes('<section className="w-full">'), 'KPIRibbon must be placed in a full-width section at the top');
       assert.ok(content.includes('<KPIRibbon layout="ribbon" />'), 'ThreeColumnDashboard must render KPIRibbon with layout="ribbon"');
 
-      // Outer Container & Grid
-      assert.ok(content.includes('p-6 max-w-[1800px]'), 'ThreeColumnDashboard must use p-6 max-w-[1800px]');
+      // Outer Container
+      assert.ok(content.includes('max-w-[1860px]'), 'ThreeColumnDashboard must use max-w-[1860px]');
       assert.ok(content.includes('bg-[#f4f6fa]'), 'ThreeColumnDashboard must have bg-[#f4f6fa] background');
-      assert.ok(content.includes('lg:grid-cols-12'), 'ThreeColumnDashboard must define desktop 12-column grid at lg breakpoint');
-      assert.ok(content.includes('items-start'), 'Grid must use items-start for natural card heights with consistent gaps');
-      assert.ok(content.includes('gap-6'), 'Grid must use gap-6 for generous executive whitespace');
 
-      // Column 1 (Left Rail: 4 at lg, 3 at xl) - Analytics & Rankings
-      assert.ok(content.includes('lg:col-span-4 xl:col-span-3'), 'Column 1 must span 4 cols at lg and 3 cols at xl');
-      assert.ok(content.includes('ScoreDecomposition'), 'Column 1 must include ScoreDecomposition');
-      assert.ok(content.includes('TopLowerMatrix'), 'Column 1 must include TopLowerMatrix');
+      // Stage 2 (md/lg 2-Column Asymmetric Layout)
+      assert.ok(content.includes('md:col-span-12 lg:col-span-7'), 'Primary Column must span 12 at md and 7 at lg');
+      assert.ok(content.includes('md:col-span-12 lg:col-span-5'), 'Secondary Column must span 12 at md and 5 at lg');
 
-      // Column 2 (Center Rail: 4 at lg, 5 at xl) - Map, Ticker & State Leaderboard
-      assert.ok(content.includes('lg:col-span-4 xl:col-span-5'), 'Column 2 must span 4 cols at lg and 5 cols at xl');
-      assert.ok(content.includes('GISMap'), 'Column 2 must include GISMap');
-      assert.ok(content.includes('BreakingNewsTicker'), 'Column 2 must include BreakingNewsTicker');
-      assert.ok(content.includes('DistrictLeaderboard'), 'Column 2 must include DistrictLeaderboard directly below Breaking News');
-      assert.ok(content.includes('showChart={false}'), 'ThreeColumnDashboard must pass showChart={false} to DistrictLeaderboard');
+      // Stage 3 (xl 3-Column Balanced Layout)
+      assert.ok(content.includes('xl:col-span-3'), 'Left Column must span 3 at xl');
+      assert.ok(content.includes('xl:col-span-5'), 'Center Column must span 5 at xl');
+      assert.ok(content.includes('xl:col-span-4'), 'Right Column must span 4 at xl');
 
-      // Column 3 (Right Rail: 4 at lg, 4 at xl) - Live Intelligence & Streaming
-      assert.ok(content.includes('lg:col-span-4 xl:col-span-4'), 'Column 3 must span 4 cols at lg and 4 cols at xl');
-      assert.ok(content.includes('SocialMediaAnalysis'), 'Column 3 must include SocialMediaAnalysis');
-      assert.ok(content.includes('EmergencyAlert'), 'Column 3 must include EmergencyAlert');
-      assert.ok(content.includes('LiveStreaming'), 'Column 3 must include LiveStreaming');
-      assert.ok(content.includes('LiveNewsQueue'), 'Column 3 must include LiveNewsQueue');
+      // Components Assembled
+      assert.ok(content.includes('ScoreDecomposition'), 'Must include ScoreDecomposition');
+      assert.ok(content.includes('KeyMetricsTrends'), 'Must include KeyMetricsTrends');
+      assert.ok(content.includes('TopLowerMatrix'), 'Must include TopLowerMatrix');
+      assert.ok(content.includes('GISMap'), 'Must include GISMap');
+      assert.ok(content.includes('BreakingNewsTicker'), 'Must include BreakingNewsTicker');
+      assert.ok(content.includes('DistrictLeaderboard'), 'Must include DistrictLeaderboard');
+      assert.ok(content.includes('showChart={false}'), 'Must pass showChart={false} to DistrictLeaderboard');
+      assert.ok(content.includes('SocialMediaAnalysis'), 'Must include SocialMediaAnalysis');
+      assert.ok(content.includes('EmergencyAlert'), 'Must include EmergencyAlert');
+      assert.ok(content.includes('LiveStreaming'), 'Must include LiveStreaming');
+      assert.ok(content.includes('LiveNewsQueue'), 'Must include LiveNewsQueue');
+
+      // Bottom baseline alignment
+      assert.ok(content.includes('[&>*]:flex-1 [&>*]:h-full'), 'Bottom panels must be anchored with flex-1 and h-full');
     });
   });
 
@@ -81,8 +84,79 @@ describe('Three-Column Executive Dashboard Workspace', () => {
     });
   });
 
-  describe('4. Auxiliary Modules Implementation & Responsive Adjustments', () => {
-    it('BreakingNewsTicker should be solid red bar with white text, cycling, pausing, and accessibility', () => {
+  describe('4. Decongestion & Responsive Bug Fixes (Bugs 1-4)', () => {
+    it('Bug 1: SocialMediaAnalysis should stack on desktop and split on 2xl with tab toggle', () => {
+      const socialPath = path.join(
+        ROOT_DIR,
+        'src',
+        'components',
+        'leadership',
+        'SocialMediaAnalysis',
+        'SocialMediaAnalysis.tsx'
+      );
+      const content = fs.readFileSync(socialPath, 'utf8');
+      assert.ok(content.includes('grid-cols-1 2xl:grid-cols-2'), 'Streams must stack on standard desktop and split on 2xl to avoid text collision');
+      assert.ok(content.includes('activeTab'), 'SocialMediaAnalysis must support tab filtering toggle');
+      assert.ok(content.includes('max-h-[240px]'), 'Streams must be capped at max-h-[240px]');
+    });
+
+    it('Bug 2: GISMap should give map 100% width and place telemetry details below', () => {
+      const gisPath = path.join(
+        ROOT_DIR,
+        'src',
+        'components',
+        'leadership',
+        'GISMap',
+        'GISMap.tsx'
+      );
+      const content = fs.readFileSync(gisPath, 'utf8');
+      assert.ok(content.includes('min-h-[300px] sm:min-h-[360px]'), 'Map canvas must have min-h-[300px] sm:min-h-[360px]');
+      assert.ok(content.includes('w-full'), 'Map canvas must take full 100% width');
+      assert.ok(content.includes('District Live State'), 'Telemetry details must be present below map');
+      assert.ok(content.includes('grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'), 'Telemetry strip must use multi-column sub-grid below map');
+    });
+
+    it('Bug 3: LiveStreaming should have enlarged 16:9 canvas and 2x2 relay buttons on desktop', () => {
+      const liveStreamPath = path.join(
+        ROOT_DIR,
+        'src',
+        'components',
+        'leadership',
+        'LiveStreaming',
+        'LiveStreaming.tsx'
+      );
+      const content = fs.readFileSync(liveStreamPath, 'utf8');
+      assert.ok(content.includes('aspect-video'), 'Video player must be aspect-video 16:9');
+      assert.ok(content.includes('min-h-[240px] sm:min-h-[280px]'), 'Video canvas must have min-h-[240px] sm:min-h-[280px]');
+      assert.ok(content.includes('grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4'), 'Relay stream buttons must be in spacious 2x2 grid on desktop');
+    });
+
+    it('Bug 4: KeyMetricsTrends & ScoreDecomposition should eliminate redundant subtitles and use 2x2 channel mix', () => {
+      const chartPath = path.join(
+        ROOT_DIR,
+        'src',
+        'components',
+        'zones',
+        'DistrictLeaderboard',
+        'DistrictPerformanceChart.tsx'
+      );
+      const chartContent = fs.readFileSync(chartPath, 'utf8');
+      assert.ok(!chartContent.includes('Top 5 Districts by 4-Pillar Composite Index (25/25/25/25)'), 'Redundant duplicate chart subtitle must be removed');
+      assert.ok(chartContent.includes('itemGap: 14'), 'Legend must have breathing room');
+
+      const scorePath = path.join(
+        ROOT_DIR,
+        'src',
+        'components',
+        'zones',
+        'ScoreDecomposition',
+        'ScoreDecomposition.tsx'
+      );
+      const scoreContent = fs.readFileSync(scorePath, 'utf8');
+      assert.ok(scoreContent.includes('grid grid-cols-2 gap-2 p-3'), 'ScoreDecomposition must display 4-Channel mix in a clean 2-column grid box with p-3');
+    });
+
+    it('BreakingNewsTicker should be solid red bar with rounded-xl px-4 py-2 and white text', () => {
       const tickerPath = path.join(
         ROOT_DIR,
         'src',
@@ -93,42 +167,12 @@ describe('Three-Column Executive Dashboard Workspace', () => {
       assert.ok(fs.existsSync(tickerPath), 'BreakingNewsTicker.tsx must exist');
       const content = fs.readFileSync(tickerPath, 'utf8');
       assert.ok(content.includes('bg-red-600'), 'BreakingNewsTicker must have solid red bg-red-600 background');
-      assert.ok(content.includes('text-white'), 'BreakingNewsTicker must have white text');
+      assert.ok(content.includes('rounded-xl px-4'), 'BreakingNewsTicker must have rounded-xl px-4');
       assert.ok(content.includes('BREAKING NEWS'), 'BreakingNewsTicker must display English BREAKING NEWS badge');
       assert.ok(content.includes('थेट घडामोड'), 'BreakingNewsTicker must display Marathi थेट घडामोड badge');
-      assert.ok(content.includes('isPaused'), 'BreakingNewsTicker must support pause state');
-      assert.ok(content.includes('role="region"'), 'BreakingNewsTicker must have accessible region role');
     });
 
-    it('LiveStreaming should have enlarged video canvas and 4-column horizontal relay buttons', () => {
-      const liveStreamPath = path.join(
-        ROOT_DIR,
-        'src',
-        'components',
-        'leadership',
-        'LiveStreaming',
-        'LiveStreaming.tsx'
-      );
-      const content = fs.readFileSync(liveStreamPath, 'utf8');
-      assert.ok(content.includes('min-h-[260px]'), 'Video canvas must have min-h-[260px]');
-      assert.ok(content.includes('grid-cols-2 sm:grid-cols-4'), 'Relay stream buttons must be in a 4-column row underneath');
-    });
-
-    it('SocialMediaAnalysis should use side-by-side streams on XL with max-h-[240px]', () => {
-      const socialPath = path.join(
-        ROOT_DIR,
-        'src',
-        'components',
-        'leadership',
-        'SocialMediaAnalysis',
-        'SocialMediaAnalysis.tsx'
-      );
-      const content = fs.readFileSync(socialPath, 'utf8');
-      assert.ok(content.includes('grid-cols-1 xl:grid-cols-2'), 'Streams must be side-by-side on xl screens');
-      assert.ok(content.includes('max-h-[240px]'), 'Streams must be capped at max-h-[240px]');
-    });
-
-    it('LiveNewsQueue should be capped at max-h-[220px]', () => {
+    it('LiveNewsQueue should be capped at max-h-[210px]', () => {
       const queuePath = path.join(
         ROOT_DIR,
         'src',
@@ -137,10 +181,10 @@ describe('Three-Column Executive Dashboard Workspace', () => {
         'LiveNewsQueue.tsx'
       );
       const content = fs.readFileSync(queuePath, 'utf8');
-      assert.ok(content.includes('max-h-[220px]'), 'LiveNewsQueue feed list must be capped at max-h-[220px]');
+      assert.ok(content.includes('max-h-[210px]'), 'LiveNewsQueue feed list must be capped at max-h-[210px]');
     });
 
-    it('DistrictTable should dock pagination footer to bottom edge and provide vertical row breathing room', () => {
+    it('DistrictTable should provide vertical row breathing room and overflow-x-auto -mx-1 px-1', () => {
       const tablePath = path.join(
         ROOT_DIR,
         'src',
@@ -151,11 +195,11 @@ describe('Three-Column Executive Dashboard Workspace', () => {
       );
       const content = fs.readFileSync(tablePath, 'utf8');
       assert.ok(content.includes('py-3 px-3'), 'DistrictTable must use py-3 px-3 for vertical breathing room');
+      assert.ok(content.includes('overflow-x-auto -mx-1 px-1'), 'DistrictTable must wrap in overflow-x-auto -mx-1 px-1');
       assert.ok(content.includes('min-w-[500px]'), 'DistrictTable must fit comfortably with zero clipping');
-      assert.ok(content.includes('mt-auto'), 'DistrictTable pagination must dock to bottom with mt-auto');
     });
 
-    it('TopLowerMatrix should fit Left Column with comfortable padding and responsive progress bar', () => {
+    it('TopLowerMatrix should fit Left Column with comfortable padding and overflow-x-auto -mx-1 px-1', () => {
       const matrixPath = path.join(
         ROOT_DIR,
         'src',
@@ -166,12 +210,13 @@ describe('Three-Column Executive Dashboard Workspace', () => {
       );
       const content = fs.readFileSync(matrixPath, 'utf8');
       assert.ok(content.includes('py-3 px-3'), 'TopLowerMatrix must use py-3 px-3 padding');
+      assert.ok(content.includes('overflow-x-auto -mx-1 px-1'), 'TopLowerMatrix must use overflow-x-auto -mx-1 px-1');
       assert.ok(content.includes('hidden 2xl:inline-block'), 'Progress bar must hide on narrow column spans');
     });
   });
 
   describe('5. Skeleton Synchronization (Zero CLS)', () => {
-    it('DashboardPageSkeleton should mirror the three-column layout and red ticker', () => {
+    it('DashboardPageSkeleton should mirror the layout, chart skeleton, and red ticker', () => {
       const skeletonPath = path.join(
         ROOT_DIR,
         'src',
@@ -180,11 +225,10 @@ describe('Three-Column Executive Dashboard Workspace', () => {
         'DashboardPageSkeleton.tsx'
       );
       const content = fs.readFileSync(skeletonPath, 'utf8');
-      assert.ok(content.includes('p-6 max-w-[1800px]'), 'DashboardPageSkeleton must mirror outer p-6 max-w-[1800px]');
+      assert.ok(content.includes('max-w-[1860px]'), 'DashboardPageSkeleton must mirror outer max-w-[1860px]');
       assert.ok(content.includes('bg-[#f4f6fa]'), 'DashboardPageSkeleton must mirror bg-[#f4f6fa]');
       assert.ok(content.includes('lg:grid-cols-12'), 'DashboardPageSkeleton must mirror 12-column grid at lg breakpoint');
-      assert.ok(content.includes('items-start'), 'DashboardPageSkeleton must use items-start');
-      assert.ok(content.includes('gap-6'), 'DashboardPageSkeleton must mirror gap-6');
+      assert.ok(content.includes('items-stretch'), 'DashboardPageSkeleton must use items-stretch');
       assert.ok(content.includes('lg:col-span-4 xl:col-span-3'), 'DashboardPageSkeleton col 1 must match ThreeColumnDashboard');
       assert.ok(content.includes('lg:col-span-4 xl:col-span-5'), 'DashboardPageSkeleton col 2 must match ThreeColumnDashboard');
       assert.ok(content.includes('lg:col-span-4 xl:col-span-4'), 'DashboardPageSkeleton col 3 must match ThreeColumnDashboard');

@@ -72,7 +72,7 @@ export const BreakingNewsTicker: React.FC = () => {
 
   return (
     <div
-      className="w-full h-11 bg-red-600 text-white rounded-lg p-3 flex items-center justify-between gap-3 shadow-sm border border-red-700 overflow-hidden select-none"
+      className="w-full h-11 bg-red-600 text-white rounded-xl px-4 py-2 flex items-center justify-between gap-3 shadow-sm border border-red-700 overflow-hidden select-none"
       role="region"
       aria-label={language === 'mr' ? 'थेट वृत्त टिकर' : 'Breaking News Ticker'}
     >

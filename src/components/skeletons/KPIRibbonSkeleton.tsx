@@ -6,12 +6,12 @@ export const KPIRibbonSkeleton: React.FC<{ cardsCount?: number }> = ({ cardsCoun
     <div
       className={`grid grid-cols-1 sm:grid-cols-2 ${
         cardsCount === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-4'
-      } gap-3`}
+      } gap-3.5 sm:gap-4 xl:gap-5`}
     >
       {Array.from({ length: cardsCount }).map((_, index) => (
         <div
           key={index}
-          className="bg-white border border-slate-200 rounded-lg p-3 flex flex-col justify-between shadow-xs h-full min-h-[114px]"
+          className="bg-white border border-slate-200/90 rounded-xl p-3 sm:p-4 flex flex-col justify-between shadow-xs h-full min-h-[114px]"
         >
           {/* 1. Header: Icon + Title */}
           <div className="flex items-center justify-between mb-1.5">

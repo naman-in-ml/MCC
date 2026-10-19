@@ -258,7 +258,7 @@ export const LiveNewsQueue: React.FC = () => {
       {!isCollapsed && (
         <div
           ref={containerRef}
-          className="overflow-y-auto divide-y divide-slate-100 max-h-[220px] flex-1 bg-white"
+          className="overflow-y-auto divide-y divide-slate-100 max-h-[210px] flex-1 bg-white"
         >
           {filteredQueue.length === 0 ? (
             <div className="p-6 text-center text-xs text-slate-500">

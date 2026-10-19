@@ -107,7 +107,7 @@ export const DistrictTable: React.FC<DistrictTableProps> = ({
 
   return (
     <div className="flex-1 flex flex-col justify-between gap-3 w-full">
-      <div className="overflow-x-auto border border-slate-300 rounded-lg shadow-2xs bg-white w-full">
+      <div className="overflow-x-auto -mx-1 px-1 border border-slate-200/90 rounded-lg shadow-2xs bg-white w-full">
         <table className="w-full text-left text-xs min-w-[500px]">
           <thead className="bg-gov-primary text-white font-semibold border-b border-gov-primary-dark select-none">
             <tr>
@@ -117,7 +117,7 @@ export const DistrictTable: React.FC<DistrictTableProps> = ({
                 onKeyDown={(e) => handleHeaderKeyDown(e, 'rank')}
                 tabIndex={0}
                 aria-sort={getAriaSort('rank')}
-                className="py-2 px-2 w-10 text-center cursor-pointer hover:bg-gov-primary-light focus-visible:bg-gov-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors group"
+                className="py-3 px-3 w-10 text-center cursor-pointer hover:bg-gov-primary-light focus-visible:bg-gov-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors group"
                 title="Sort by Rank"
               >
                 <div className="flex items-center justify-center gap-0.5">
@@ -132,7 +132,7 @@ export const DistrictTable: React.FC<DistrictTableProps> = ({
                 onKeyDown={(e) => handleHeaderKeyDown(e, 'name')}
                 tabIndex={0}
                 aria-sort={getAriaSort('name')}
-                className="py-2 px-2.5 cursor-pointer hover:bg-gov-primary-light focus-visible:bg-gov-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors group"
+                className="py-3 px-3 cursor-pointer hover:bg-gov-primary-light focus-visible:bg-gov-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors group"
                 title="Sort by District"
               >
                 <div className="flex items-center gap-0.5">
@@ -147,7 +147,7 @@ export const DistrictTable: React.FC<DistrictTableProps> = ({
                 onKeyDown={(e) => handleHeaderKeyDown(e, 'releases')}
                 tabIndex={0}
                 aria-sort={getAriaSort('releases')}
-                className="py-2 px-2 text-right cursor-pointer hover:bg-gov-primary-light focus-visible:bg-gov-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors group"
+                className="py-3 px-3 text-right cursor-pointer hover:bg-gov-primary-light focus-visible:bg-gov-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors group"
                 title="Sort by Releases"
               >
                 <div className="flex items-center justify-end gap-0.5">
@@ -162,7 +162,7 @@ export const DistrictTable: React.FC<DistrictTableProps> = ({
                 onKeyDown={(e) => handleHeaderKeyDown(e, 'avgTAT')}
                 tabIndex={0}
                 aria-sort={getAriaSort('avgTAT')}
-                className="py-2 px-2 text-right cursor-pointer hover:bg-gov-primary-light focus-visible:bg-gov-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors group"
+                className="py-3 px-3 text-right cursor-pointer hover:bg-gov-primary-light focus-visible:bg-gov-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors group"
                 title="Sort by Turnaround Time"
               >
                 <div className="flex items-center justify-end gap-0.5">
@@ -177,7 +177,7 @@ export const DistrictTable: React.FC<DistrictTableProps> = ({
                 onKeyDown={(e) => handleHeaderKeyDown(e, 'sentiment')}
                 tabIndex={0}
                 aria-sort={getAriaSort('sentiment')}
-                className="py-2 px-2 text-right cursor-pointer hover:bg-gov-primary-light focus-visible:bg-gov-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors group"
+                className="py-3 px-3 text-right cursor-pointer hover:bg-gov-primary-light focus-visible:bg-gov-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors group"
                 title="Sort by Sentiment"
               >
                 <div className="flex items-center justify-end gap-0.5">
@@ -192,7 +192,7 @@ export const DistrictTable: React.FC<DistrictTableProps> = ({
                 onKeyDown={(e) => handleHeaderKeyDown(e, 'crisisSLA')}
                 tabIndex={0}
                 aria-sort={getAriaSort('crisisSLA')}
-                className="py-2 px-2 text-right cursor-pointer hover:bg-gov-primary-light focus-visible:bg-gov-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors group"
+                className="py-3 px-3 text-right cursor-pointer hover:bg-gov-primary-light focus-visible:bg-gov-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors group"
                 title="Sort by Crisis SLA"
               >
                 <div className="flex items-center justify-end gap-0.5">
@@ -207,7 +207,7 @@ export const DistrictTable: React.FC<DistrictTableProps> = ({
                 onKeyDown={(e) => handleHeaderKeyDown(e, 'cpi')}
                 tabIndex={0}
                 aria-sort={getAriaSort('cpi')}
-                className="py-2 px-2 text-right font-bold cursor-pointer hover:bg-gov-primary-light focus-visible:bg-gov-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors group"
+                className="py-3 px-3 text-right font-bold cursor-pointer hover:bg-gov-primary-light focus-visible:bg-gov-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors group"
                 title="Sort by CPI Composite Performance Index"
               >
                 <div className="flex items-center justify-end gap-0.5">
@@ -217,7 +217,7 @@ export const DistrictTable: React.FC<DistrictTableProps> = ({
               </th>
 
               {/* Action */}
-              <th className="py-2 px-2 text-center w-16">{t.zone2.actionCol}</th>
+              <th className="py-3 px-3 text-center w-16">{t.zone2.actionCol}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-200 text-slate-800 bg-white">

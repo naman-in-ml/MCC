@@ -91,7 +91,7 @@ export const LiveStreaming: React.FC<LiveStreamingProps> = ({ layout = 'default'
       <div className="p-5 flex flex-col gap-4">
         <div className="flex flex-col gap-3">
           {/* Video Player Box */}
-          <div className="w-full aspect-video min-h-[260px] rounded-lg overflow-hidden bg-slate-950 border border-slate-800 relative flex flex-col justify-between shadow-md">
+          <div className="w-full aspect-video min-h-[240px] sm:min-h-[280px] rounded-xl overflow-hidden bg-slate-950 border border-slate-800 relative flex flex-col justify-between shadow-md">
             {/* Top Video Status Overlay */}
             <div className="p-2.5 flex items-center justify-between text-white text-[11px] bg-gradient-to-b from-black/80 to-transparent z-10">
               <div className="flex items-center gap-2">
@@ -126,13 +126,13 @@ export const LiveStreaming: React.FC<LiveStreamingProps> = ({ layout = 'default'
             </div>
           </div>
 
-          {/* 4 Relay Platform Buttons (4-column row underneath) */}
+          {/* 4 Relay Platform Buttons (Spacious 2x2 grid on standard desktop, 4-col only on 2xl) */}
           <div className="w-full flex flex-col gap-1.5">
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
               {language === 'mr' ? 'थेट प्रसारण स्त्रोत निवडा' : 'Select Unified Relay Stream'}
             </span>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-2.5">
               {channels.map((chan) => {
                 const isSelected = activeChannel === chan.id;
 
@@ -140,13 +140,13 @@ export const LiveStreaming: React.FC<LiveStreamingProps> = ({ layout = 'default'
                   <button
                     key={chan.id}
                     onClick={() => setActiveChannel(chan.id as 'youtube' | 'facebook' | 'instagram' | 'tv')}
-                    className={`w-full flex items-center justify-between p-2 rounded-md border text-xs transition-all shadow-2xs cursor-pointer ${
+                    className={`w-full flex items-center justify-between p-2.5 rounded-lg border text-xs transition-all shadow-2xs cursor-pointer ${
                       isSelected
                         ? 'border-gov-blue bg-blue-50/80 font-bold'
                         : 'border-slate-200 bg-white hover:bg-slate-50'
                     }`}
                   >
-                    <div className="flex items-center gap-1.5 min-w-0">
+                    <div className="flex items-center gap-2 min-w-0">
                       <div className={`p-1.5 rounded text-white shrink-0 ${chan.color.split(' ')[0]}`}>
                         {chan.iconRender()}
                       </div>
@@ -157,11 +157,7 @@ export const LiveStreaming: React.FC<LiveStreamingProps> = ({ layout = 'default'
                       </div>
                     </div>
 
-                    {isSelected && (
-                      <span className="text-[9px] text-gov-blue font-bold px-1.5 py-0.5 rounded bg-blue-100 shrink-0">
-                        {language === 'mr' ? 'सक्रिय' : 'Active'}
-                      </span>
-                    )}
+                    
                   </button>
                 );
               })}

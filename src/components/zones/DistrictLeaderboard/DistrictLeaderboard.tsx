@@ -46,7 +46,7 @@ export const DistrictLeaderboard: React.FC<DistrictLeaderboardProps> = ({ showCh
   return (
     <div className="bg-white rounded-xl shadow-sm border border-slate-200/80 flex flex-col overflow-hidden">
       {/* Header and Sub-tabs */}
-      <div className="p-5 border-b border-slate-200/80 bg-white">
+      <div className="p-4 sm:p-5 border-b border-slate-100 bg-white">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-sm font-bold text-gov-primary tracking-tight">
             {t.zone2.title}
@@ -58,7 +58,7 @@ export const DistrictLeaderboard: React.FC<DistrictLeaderboardProps> = ({ showCh
         <LeaderboardTabs activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
 
-      <div className="p-5 flex flex-col gap-4">
+      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between gap-4">
         {/* Top 5 Bar Chart */}
         {showChart && (
           <DistrictPerformanceChart

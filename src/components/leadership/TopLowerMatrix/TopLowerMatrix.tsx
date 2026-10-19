@@ -113,7 +113,7 @@ export const TopLowerMatrix: React.FC = () => {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-slate-200/80 flex flex-col overflow-hidden">
       {/* Header matching Wireframe 2 */}
-      <div className="p-5 border-b border-slate-200/80 bg-white flex items-center justify-between flex-wrap gap-2">
+      <div className="p-4 sm:p-5 border-b border-slate-100 bg-white flex items-center justify-between flex-wrap gap-2">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <h3 className="text-sm font-bold text-gov-primary tracking-tight">
@@ -165,8 +165,8 @@ export const TopLowerMatrix: React.FC = () => {
       </div>
 
       {/* Wireframe Diagram Table Representation */}
-      <div className="p-5 flex flex-col gap-4">
-        <div className="overflow-x-auto border border-slate-200 rounded-lg shadow-2xs">
+      <div className="p-4 sm:p-5 flex flex-col gap-4">
+        <div className="overflow-x-auto -mx-1 px-1 border border-slate-200/90 rounded-lg shadow-2xs">
           <table className="w-full text-left text-xs">
             <thead className="bg-slate-50 text-gov-primary font-bold border-b border-slate-200 text-[11px]">
               <tr>
