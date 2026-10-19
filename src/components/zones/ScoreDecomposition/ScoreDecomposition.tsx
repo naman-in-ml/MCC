@@ -4,12 +4,13 @@ import React, { useMemo } from 'react';
 import { useDashboardStore } from '@/stores/dashboardStore';
 import { useTranslation } from '@/lib/translations';
 import { ScoreMetricBar } from './ScoreMetricBar';
+import { ScoreDecompositionSkeleton } from '@/components/skeletons/ScoreDecompositionSkeleton';
 import { getDistrictName } from '@/lib/dataLocalization';
 import { getDistrictSentiment } from '@/lib/sentimentEngine';
 import { MaterialIcon } from '@/components/shared/MaterialIcon';
 
 export const ScoreDecomposition: React.FC = () => {
-  const { districts, selectedDistrictId, selectedPeriod, language } = useDashboardStore();
+  const { districts, selectedDistrictId, selectedPeriod, language, isLoadingData } = useDashboardStore();
   const t = useTranslation(language);
 
   const selected =
@@ -20,12 +21,17 @@ export const ScoreDecomposition: React.FC = () => {
     return getDistrictSentiment(selected.id, selectedPeriod);
   }, [selected.id, selectedPeriod]);
 
+  // Safeguard #1: Return skeleton directly at root level to prevent double card wrappers
+  if (isLoadingData) {
+    return <ScoreDecompositionSkeleton />;
+  }
+
   return (
-    <div className="bg-surface border border-slate-200 rounded-lg flex flex-col shadow-xs overflow-hidden">
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200/80 flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-slate-200 bg-surface flex items-center justify-between flex-wrap gap-2">
+      <div className="p-5 border-b border-slate-200/80 bg-white flex items-center justify-between flex-wrap gap-2">
         <div>
-          <h3 className="text-sm font-bold text-gov-primary tracking-tight">
+          <h3 className="text-sm font-bold text-gov-primary tracking-tight mb-1">
             {t.zone3.title} — {language === 'mr' ? (selected.nameMr || getDistrictName(selected.name, 'mr')) : selected.name}
           </h3>
           <p className="text-[11px] text-slate-500 font-medium">
@@ -45,7 +51,7 @@ export const ScoreDecomposition: React.FC = () => {
       </div>
 
       {/* 4 Constituent Scores */}
-      <div className="p-4 space-y-4 bg-white">
+      <div className="p-5 space-y-4 bg-white">
         {/* 1. Volume Score */}
         <ScoreMetricBar
           icon="newspaper"

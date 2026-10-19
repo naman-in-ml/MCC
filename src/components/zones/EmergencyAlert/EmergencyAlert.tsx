@@ -17,11 +17,12 @@ import {
 } from '@/lib/dataLocalization';
 import { PrimaryIncidentCard } from './PrimaryIncidentCard';
 import { IncidentList } from './IncidentList';
+import { EmergencyAlertSkeleton } from '@/components/skeletons/EmergencyAlertSkeleton';
 
 export const EmergencyAlert: React.FC = () => {
   const pathname = usePathname();
   const isCrisisRoute = pathname === '/crisis';
-  const { incidents, authorizeRebuttalApi, userRole, language } = useDashboardStore();
+  const { incidents, authorizeRebuttalApi, userRole, language, isLoadingData } = useDashboardStore();
   const t = useTranslation(language);
 
   // State to support promoting any queued incident into the Primary Incident Card slot
@@ -40,6 +41,11 @@ export const EmergencyAlert: React.FC = () => {
 
   // Collector & DG Admin can authorize rebuttals
   const canAuthorize = userRole === 'dg_admin' || userRole === 'collector';
+
+  // Safeguards #1 & #3: Return skeleton directly at root level, preserving collapsed state
+  if (isLoadingData) {
+    return <EmergencyAlertSkeleton isCollapsed={isCollapsed} isCrisisRoute={isCrisisRoute} />;
+  }
 
   return (
     <div className="bg-white border border-slate-200/90 rounded-xl shadow-sm border-t-2 border-t-rose-600 flex flex-col">

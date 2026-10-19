@@ -95,16 +95,20 @@ const MULTI_PLATFORM_STREAM: SocialPost[] = [
   },
 ];
 
-export const SocialMediaAnalysis: React.FC = () => {
+export interface SocialMediaAnalysisProps {
+  layout?: 'default' | 'column';
+}
+
+export const SocialMediaAnalysis: React.FC<SocialMediaAnalysisProps> = ({ layout = 'default' }) => {
   const { language } = useDashboardStore();
   const t = useTranslation(language);
 
   return (
-    <div className="bg-surface border border-slate-200 rounded-lg flex flex-col h-full shadow-xs overflow-hidden">
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200/80 flex flex-col overflow-hidden">
       {/* Header matching Wireframe 2 */}
-      <div className="px-4 py-3 border-b border-slate-200 bg-surface flex items-center justify-between flex-wrap gap-2">
+      <div className="p-5 border-b border-slate-200/80 bg-white flex items-center justify-between flex-wrap gap-2">
         <div>
-          <h3 className="text-sm font-bold text-gov-primary tracking-tight">
+          <h3 className="text-sm font-bold text-gov-primary tracking-tight mb-1">
             {t.leadership.socialTitle}
           </h3>
           <p className="text-[11px] text-slate-500 font-medium">
@@ -119,8 +123,8 @@ export const SocialMediaAnalysis: React.FC = () => {
       </div>
 
       {/* Split Stream Layout as depicted in Wireframe 2 */}
-      <div className="p-3.5 flex-1 flex flex-col justify-between">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 relative">
+      <div className="p-5 flex flex-col gap-4">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-3 relative">
           {/* Stream 1: Twitter / X */}
           <div className="border border-slate-200 rounded-lg p-2.5 bg-slate-50/50 flex flex-col gap-2">
             <div className="flex items-center justify-between pb-1.5 border-b border-slate-200 text-xs">
@@ -133,7 +137,7 @@ export const SocialMediaAnalysis: React.FC = () => {
               </span>
             </div>
 
-            <div className="space-y-2 overflow-y-auto max-h-[220px] pr-1">
+            <div className="space-y-2 overflow-y-auto max-h-[240px] pr-1">
               {TWITTER_STREAM.map((post) => (
                 <div
                   key={post.id}
@@ -171,7 +175,7 @@ export const SocialMediaAnalysis: React.FC = () => {
               </span>
             </div>
 
-            <div className="space-y-2 overflow-y-auto max-h-[220px] pr-1">
+            <div className="space-y-2 overflow-y-auto max-h-[240px] pr-1">
               {MULTI_PLATFORM_STREAM.map((post) => (
                 <div
                   key={post.id}

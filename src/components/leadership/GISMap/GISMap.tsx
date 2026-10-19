@@ -4,6 +4,7 @@ import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useDashboardStore } from '@/stores/dashboardStore';
 import { useTranslation } from '@/lib/translations';
 import { getLocalizedStatus, getOfficerInfo } from '@/lib/dataLocalization';
+import { GISMapSkeleton } from '@/components/skeletons/GISMapSkeleton';
 import {
   DISTRICT_BY_ID,
   DISTRICT_GEOMETRY,
@@ -163,7 +164,7 @@ const LABEL_PX = 9;
 const LABEL_CHAR_PX = 5;
 
 export const GISMap: React.FC = () => {
-  const { language, selectedDistrictId, setSelectedDistrictId } = useDashboardStore();
+  const { language, selectedDistrictId, setSelectedDistrictId, isLoadingData } = useDashboardStore();
   const t = useTranslation(language);
   const selectedId = resolveDistrictId(selectedDistrictId);
 
@@ -314,15 +315,19 @@ export const GISMap: React.FC = () => {
     ? (language === 'mr' ? (getOfficerInfo(inspectedDio.officer, 'mr')?.name || inspectedDio.officer) : inspectedDio.officer)
     : (language === 'en' ? 'Not assigned' : 'नियुक्त नाही');
 
+  if (isLoadingData) {
+    return <GISMapSkeleton />;
+  }
+
   return (
-    <div className="bg-surface border border-slate-200 rounded-lg flex flex-col h-full shadow-xs overflow-hidden">
-      {/* 1. Locked Safe Header (Fixed 52px height) */}
-      <div className="px-4 py-2 border-b border-slate-200 bg-surface flex items-center justify-between gap-3 h-[52px] min-h-[52px] max-h-[52px] shrink-0">
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200/80 flex flex-col overflow-hidden">
+      {/* 1. Locked Safe Header */}
+      <div className="px-5 py-4 border-b border-slate-200/80 bg-white flex items-center justify-between gap-3 shrink-0">
         <div className="min-w-0 flex-1">
           <h3 className="text-sm font-bold text-gov-primary tracking-tight truncate" title={t.leadership.gisTitle}>
             {t.leadership.gisTitle}
           </h3>
-          <p className="text-[11px] text-slate-500 font-medium truncate" title={t.leadership.gisSub}>
+          <p className="text-[11px] text-slate-500 font-medium truncate mt-0.5" title={t.leadership.gisSub}>
             {t.leadership.gisSub}
           </p>
         </div>
@@ -366,11 +371,11 @@ export const GISMap: React.FC = () => {
       </div>
 
       {/* 2. Main Safe Body (Columns with Locked Geometry) */}
-      <div className="p-3 flex-1 flex flex-col md:flex-row gap-3.5 items-stretch min-w-0">
+      <div className="p-4 flex flex-col md:flex-row gap-4 items-stretch min-w-0">
         {/* Left: Map Canvas Column (58% width, aspect locked) */}
         <div className="w-full md:w-[58%] flex flex-col justify-between gap-2 min-w-0">
           <div
-            className="relative w-full aspect-[800/664] bg-gradient-to-b from-slate-50 to-blue-50/30 rounded-lg border border-slate-200 overflow-hidden shadow-inner shrink-0"
+            className="relative w-full aspect-[800/664] max-h-[380px] bg-gradient-to-b from-slate-50 to-blue-50/30 rounded-lg border border-slate-200 overflow-hidden shadow-inner shrink-0"
           >
             <svg
               ref={svgRef}
@@ -571,7 +576,7 @@ export const GISMap: React.FC = () => {
         </div>
 
         {/* Right: Locked Safe Hover Card (42% width, invariant height and row bounds) */}
-        <div className="w-full md:w-[42%] border-2 border-gov-blue/30 p-3 rounded-lg bg-white shadow-xs flex flex-col justify-between h-full min-h-[280px] max-h-[380px] overflow-hidden min-w-0">
+        <div className="w-full md:w-[42%] border-2 border-gov-blue/30 p-3.5 rounded-lg bg-white shadow-xs flex flex-col justify-between max-h-[380px] overflow-hidden min-w-0">
           {/* Card Header (Fixed bounds with truncation) */}
           <div className="pb-2 border-b border-slate-200 shrink-0">
             <div className="flex items-center justify-between gap-1 mb-0.5">

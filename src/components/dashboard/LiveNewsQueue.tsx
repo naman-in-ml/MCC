@@ -6,9 +6,10 @@ import { INITIAL_QUEUE_ITEMS, generateRandomQueueItem } from '@/data/newsQueueDa
 import { MaterialIcon } from '@/components/shared/MaterialIcon';
 import { useDashboardStore } from '@/stores/dashboardStore';
 import { getDistrictName, getLocalizedChannel } from '@/lib/dataLocalization';
+import { LiveNewsQueueSkeleton } from '@/components/skeletons/LiveNewsQueueSkeleton';
 
 export const LiveNewsQueue: React.FC = () => {
-  const { language, selectedDistrictId } = useDashboardStore();
+  const { language, selectedDistrictId, isLoadingData } = useDashboardStore();
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
   const [activeSentimentFilter, setActiveSentimentFilter] = useState<string>('All');
   const [queueItems, setQueueItems] = useState<NewsQueueItem[]>(INITIAL_QUEUE_ITEMS);
@@ -123,8 +124,13 @@ export const LiveNewsQueue: React.FC = () => {
 
   const latestItem = filteredQueue[0] || queueItems[0];
 
+  // Safeguard #1: Return skeleton directly at root level to prevent double card wrappers
+  if (isLoadingData) {
+    return <LiveNewsQueueSkeleton />;
+  }
+
   return (
-    <div className="bg-surface rounded-lg border border-slate-200 shadow-xs overflow-hidden transition-all duration-200 flex flex-col">
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200/80 overflow-hidden transition-all duration-200 flex flex-col">
       {/* 
         HEADER / CONTROLS BAR:
         Contains status, queue metrics, manual simulation trigger, and collapse toggle
@@ -252,7 +258,7 @@ export const LiveNewsQueue: React.FC = () => {
       {!isCollapsed && (
         <div
           ref={containerRef}
-          className="overflow-y-auto divide-y divide-slate-100 max-h-[380px] flex-1 bg-white"
+          className="overflow-y-auto divide-y divide-slate-100 max-h-[220px] flex-1 bg-white"
         >
           {filteredQueue.length === 0 ? (
             <div className="p-6 text-center text-xs text-slate-500">
