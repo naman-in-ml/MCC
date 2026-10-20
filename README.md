@@ -8,8 +8,8 @@
 [![Zustand](https://img.shields.io/badge/Zustand-5.0-brown?style=flat)](https://github.com/pmndrs/zustand)
 [![ECharts](https://img.shields.io/badge/Apache_ECharts-6.1-red?style=flat&logo=apache-echarts)](https://echarts.apache.org/)
 [![GIGW 3.0](https://img.shields.io/badge/Compliance-GIGW_3.0_%26_UX4G-orange?style=flat)](https://guidelines.india.gov.in/)
-[![Tests](https://img.shields.io/badge/Test_Suite-62%2F62_Passing_(100%25)-brightgreen?style=flat)](https://nodejs.org/api/test.html)
-[![Routes](https://img.shields.io/badge/App_Routes-30_Routes_(Static_%26_Dynamic)-blue?style=flat)](https://nextjs.org/)
+[![Tests](https://img.shields.io/badge/Test_Suite-75%2F75_Passing_(100%25)-brightgreen?style=flat)](https://nodejs.org/api/test.html)
+[![Routes](https://img.shields.io/badge/App_Routes-31_Routes_(Static_%26_Dynamic)-blue?style=flat)](https://nextjs.org/)
 
 ---
 
@@ -83,7 +83,8 @@ maha-command-center/
 │   ├── jwt.test.mjs                        # JWT authentication, HMAC-SHA256 signing, 12-hour TTL security suite
 │   ├── skeleton_loaders.test.mjs           # Component-wise skeletons, persistent app shell, loading boundaries suite
 │   ├── three_column_dashboard.test.mjs     # Executive 3-column workspace & responsive breathing room (v5.0) suite
-│   └── auth_redirect.test.mjs              # Authenticated session & /login redirection guard suite
+│   ├── auth_redirect.test.mjs              # Authenticated session & /login redirection guard suite
+│   └── ai_assistant.test.mjs               # Route-aware morphing AI Assistant widget & hybrid pipeline suite
 │
 ├── public/                                 # Static public assets, icons, and emblems
 │
@@ -95,6 +96,8 @@ maha-command-center/
     │   └── dashboard.ts                    # Core TypeScript models (AuthUser, DistrictData, IncidentData, OCRRecord)
     │
     ├── lib/
+    │   ├── ai/
+    │   │   └── route-prompts.ts            # Route prompt pools (6-8/route), local government FAQ & Fisher-Yates shuffle
     │   ├── dataLocalization.ts            # Dynamic bilingual Marathi/English number and string formatting helpers
     │   ├── jwt.ts                         # Edge-compatible HMAC-SHA256 JWT signing, validation, and 12-hr TTL
     │   ├── sentimentEngine.ts             # Multi-factor sentiment evaluation and scoring engine
@@ -112,6 +115,9 @@ maha-command-center/
     │   └── telemetryLogsAndAuditData.ts   # System audit ledger, latency logs, and network traffic records
     │
     ├── components/
+    │   ├── ai/                            # Floating AI Command Assistant Widget
+    │   │   └── ai-assistant-widget.tsx    # Route-aware morphing widget with spring physics, FAB & outside collapse
+    │   │
     │   ├── shared/                        # Reusable core primitive UI components
     │   │   ├── GovEmblem.tsx              # Scalable SVG Government of Maharashtra emblem
     │   │   ├── MaterialIcon.tsx           # Material Symbol icon bridge
@@ -295,6 +301,8 @@ maha-command-center/
         │       └── loading.tsx            # Dedicated system pipeline flow route skeleton boundary
         │
         └── api/                           # Backend API Route Handlers
+            ├── ai/
+            │   └── chat/route.ts          # State intelligence AI assistant endpoint with local fallback & error handling
             ├── auth/
             │   ├── login/route.ts         # Authenticates credentials/PIN, generates 12-hr JWT session cookie
             │   ├── logout/route.ts        # Clears active session cookie
@@ -372,6 +380,20 @@ maha-command-center/
 * **In-Card Direct Root Returns**: Components (`KPIRibbon`, `DistrictLeaderboard`, `ScoreDecomposition`, `EmergencyAlert`, `LiveNewsQueue`, `TopLowerMatrix`, `GISMap`) directly return their dedicated skeletons at the root level during `isLoadingData`, eliminating double card borders and nested frames.
 * **Store Filter Debounce Safeguard**: Rapid filter toggling is debounced with cancellation of pending timer tasks, preventing overlapping loading states.
 
+### 4.7 Global Route-Aware Morphing AI Assistant Widget (`src/components/ai/`, `src/lib/ai/`, `src/app/api/ai/`)
+* **Persistent Root Mount**: Mounted globally inside `src/app/layout.tsx` so conversation history, scroll position, and open/closed state persist seamlessly across soft route navigations.
+* **Route Visibility Guard**: Strictly hidden and unmounted on Account routes: `if (!pathname || pathname.startsWith('/account')) return null;`.
+* **Zero Hardcoded Colors**: Bound dynamically to semantic design tokens (`bg-primary`, `text-primary-foreground`, `bg-background/95`, `border-border`, `bg-muted/70`, `bg-secondary/60`) linked to institutional CSS variables.
+* **Spring-Physics Animation Choreography**:
+  * *FAB Idle & Hover*: Spring physics (`stiffness: 400, damping: 25`) with hover scale (`1.07`, `y: -2px`) and 12° icon rotation.
+  * *Morphing Expansion*: Shared layout projection (`layoutId="ai-assistant-container"`, spring `stiffness: 350, damping: 28, mass: 0.8`) smoothly morphing from a 56x56px circular button to a 400x580px executive card (78vh on mobile).
+  * *Outside Click Collapse*: Listens to `pointerdown` and `Escape` key events, reverse-morphing with spring physics (`stiffness: 380, damping: 30`) while preserving conversation in React state.
+* **Route-Aware Dynamic Prompts**: Dynamically matches routes against `ROUTE_PROMPT_POOL` (6–8 prompts per route) and applies a client-side Fisher-Yates shuffle to display 3–4 randomized suggestion chips.
+* **Hybrid Resolution Pipeline**:
+  1. *Local Knowledge Intercept*: Matches queries against `LOCAL_KNOWLEDGE_BASE` for instant zero-token responses after a simulated 350ms natural typing delay.
+  2. *AI Endpoint Fallback*: Forwards unhandled queries to `POST /api/ai/chat` with `{ messages, currentRoute, pageContext }` for state intelligence synthesis.
+  3. *In-Flight Cancellation & Retry*: Uses `AbortController` to cancel stale in-flight requests and provides inline retry on network errors.
+
 ---
 
 ## 5. Getting Started & Development Commands
@@ -400,7 +422,7 @@ Execute the complete test suite verifying authentication, skeleton loaders, exec
 ```bash
 npm test
 ```
-*Expected Result: All 62 tests across 19 suites pass with 100% success rate.*
+*Expected Result: All 75 tests across 23 suites pass with 100% success rate.*
 
 #### Running Individual Test Suites
 ```bash
@@ -418,6 +440,9 @@ node --test tests/three_column_dashboard.test.mjs
 
 # Authenticated session & /login redirection guard suite
 node --test tests/auth_redirect.test.mjs
+
+# Global route-aware morphing AI Assistant widget & hybrid pipeline suite
+node --test tests/ai_assistant.test.mjs
 ```
 
 ### TypeScript Type Checking

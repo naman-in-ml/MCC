@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { AIAssistantWidget } from '@/components/ai/ai-assistant-widget';
 
 export const metadata: Metadata = {
   title: 'Maha-Command Center — DGIPR, Government of Maharashtra',
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-page text-content-primary antialiased" suppressHydrationWarning>
         {children}
+        <AIAssistantWidget />
       </body>
     </html>
   );
