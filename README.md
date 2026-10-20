@@ -382,7 +382,7 @@ maha-command-center/
 
 ### 4.7 Global Route-Aware Morphing AI Assistant Widget (`src/components/ai/`, `src/lib/ai/`, `src/app/api/ai/`)
 * **Persistent Root Mount**: Mounted globally inside `src/app/layout.tsx` so conversation history, scroll position, and open/closed state persist seamlessly across soft route navigations.
-* **Route Visibility Guard**: Strictly hidden and unmounted on Account routes: `if (!pathname || pathname.startsWith('/account')) return null;`.
+* **Route Visibility Guard**: Strictly hidden and unmounted on Login and Account routes: `if (!pathname || pathname.startsWith('/account') || pathname.startsWith('/login')) return null;`.
 * **Zero Hardcoded Colors**: Bound dynamically to semantic design tokens (`bg-primary`, `text-primary-foreground`, `bg-background/95`, `border-border`, `bg-muted/70`, `bg-secondary/60`) linked to institutional CSS variables.
 * **Spring-Physics Animation Choreography**:
   * *FAB Idle & Hover*: Spring physics (`stiffness: 400, damping: 25`) with hover scale (`1.07`, `y: -2px`) and 12° icon rotation.

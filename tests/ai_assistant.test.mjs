@@ -132,10 +132,14 @@ describe('Global Route-Aware Morphing AI Assistant Widget Suite', () => {
     assert.ok(fs.existsSync(widgetPath), 'ai-assistant-widget.tsx should exist');
     const widgetContent = fs.readFileSync(widgetPath, 'utf-8');
 
-    it('should include the strict route visibility guard unmounting on /account', () => {
+    it('should include the strict route visibility guard unmounting on /account and /login', () => {
       assert.ok(
         widgetContent.includes("pathname.startsWith('/account')"),
         'Widget must unmount on /account route'
+      );
+      assert.ok(
+        widgetContent.includes("pathname.startsWith('/login')"),
+        'Widget must unmount on /login route'
       );
     });
 

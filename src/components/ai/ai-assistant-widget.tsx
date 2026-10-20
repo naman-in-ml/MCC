@@ -35,8 +35,8 @@ const INITIAL_GREETING: ChatMessage = {
 export const AIAssistantWidget: React.FC = () => {
   const pathname = usePathname();
 
-  // Route visibility guard: Strictly hide and unmount on /account and any sub-routes
-  if (!pathname || pathname.startsWith('/account')) {
+  // Route visibility guard: Strictly hide and unmount on /login, /account, and any sub-routes
+  if (!pathname || pathname.startsWith('/account') || pathname.startsWith('/login')) {
     return null;
   }
 
