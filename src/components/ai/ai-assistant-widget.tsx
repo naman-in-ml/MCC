@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import {
@@ -32,13 +32,8 @@ const INITIAL_GREETING: ChatMessage = {
   content: 'Hello there, how can I help you?',
 };
 
-export const AIAssistantWidget: React.FC = () => {
+export const AIAssistantWidgetContent: React.FC = () => {
   const pathname = usePathname();
-
-  // Route visibility guard: Strictly hide and unmount on /login, /account, and any sub-routes
-  if (!pathname || pathname.startsWith('/account') || pathname.startsWith('/login')) {
-    return null;
-  }
 
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_GREETING]);
@@ -54,7 +49,9 @@ export const AIAssistantWidget: React.FC = () => {
 
   // Hydration-safe randomization for route-specific suggestion chips
   useEffect(() => {
-    setPromptChips(getRandomRoutePrompts(pathname, 4));
+    if (pathname && !pathname.startsWith('/account') && !pathname.startsWith('/login')) {
+      setPromptChips(getRandomRoutePrompts(pathname, 4));
+    }
   }, [pathname]);
 
   // Scroll to bottom when messages update or loading indicator appears
@@ -105,6 +102,12 @@ export const AIAssistantWidget: React.FC = () => {
       }
     };
   }, []);
+
+  // Route visibility guard: Evaluated AFTER all hooks have executed unconditionally
+  // Ensures hook count and execution order remain 100% constant across all renders (React 19 compliance)
+  if (!pathname || pathname.startsWith('/account') || pathname.startsWith('/login')) {
+    return null;
+  }
 
   const handleSendMessage = async (textToSend?: string) => {
     const text = (textToSend || inputQuery).trim();
@@ -431,4 +434,13 @@ export const AIAssistantWidget: React.FC = () => {
     </div>
   );
 };
+
+export const AIAssistantWidget: React.FC = () => {
+  return (
+    <Suspense fallback={null}>
+      <AIAssistantWidgetContent />
+    </Suspense>
+  );
+};
+
 export default AIAssistantWidget;

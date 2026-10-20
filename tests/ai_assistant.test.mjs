@@ -182,6 +182,22 @@ describe('Global Route-Aware Morphing AI Assistant Widget Suite', () => {
         layoutContent.includes('AIAssistantWidget'),
         'src/app/layout.tsx must import and mount AIAssistantWidget'
       );
+      assert.ok(
+        layoutContent.includes('<Suspense') || widgetContent.includes('<Suspense'),
+        'AIAssistantWidget must be isolated within a Suspense boundary for React 19 compliance'
+      );
+    });
+
+    it('should declare all hooks unconditionally before evaluating the route visibility guard', () => {
+      const visibilityGuardIndex = widgetContent.indexOf("if (!pathname || pathname.startsWith('/account')");
+      const useEffectIndex = widgetContent.indexOf('useEffect(');
+      const useStateIndex = widgetContent.indexOf('useState(');
+
+      assert.ok(visibilityGuardIndex > -1, 'Visibility guard must exist');
+      assert.ok(
+        visibilityGuardIndex > useEffectIndex && visibilityGuardIndex > useStateIndex,
+        'Route visibility guard must be placed AFTER all React hooks to preserve hook count in React 19'
+      );
     });
   });
 });
