@@ -132,10 +132,14 @@ describe('Global Route-Aware Morphing AI Assistant Widget Suite', () => {
     assert.ok(fs.existsSync(widgetPath), 'ai-assistant-widget.tsx should exist');
     const widgetContent = fs.readFileSync(widgetPath, 'utf-8');
 
-    it('should include the strict route visibility guard unmounting on /account', () => {
+    it('should include the strict route visibility guard unmounting on /account and /login', () => {
       assert.ok(
         widgetContent.includes("pathname.startsWith('/account')"),
         'Widget must unmount on /account route'
+      );
+      assert.ok(
+        widgetContent.includes("pathname.startsWith('/login')"),
+        'Widget must unmount on /login route'
       );
     });
 
@@ -146,12 +150,12 @@ describe('Global Route-Aware Morphing AI Assistant Widget Suite', () => {
       );
     });
 
-    it('should bind to project semantic design tokens without hardcoded colors', () => {
+    it('should bind to project semantic design tokens and dark tinted executive palette', () => {
       assert.ok(widgetContent.includes('bg-primary text-primary-foreground'), 'Must bind to bg-primary');
-      assert.ok(widgetContent.includes('bg-background/95'), 'Must bind to bg-background/95');
-      assert.ok(widgetContent.includes('border-border'), 'Must bind to border-border');
-      assert.ok(widgetContent.includes('bg-muted/70'), 'Must bind to bg-muted/70');
-      assert.ok(widgetContent.includes('bg-secondary/60'), 'Must bind to bg-secondary/60');
+      assert.ok(widgetContent.includes('bg-slate-950/90'), 'Must bind to dark tinted card bg-slate-950/90');
+      assert.ok(widgetContent.includes('border-slate-800/90'), 'Must bind to border-slate-800/90');
+      assert.ok(widgetContent.includes('bg-slate-900/90'), 'Must bind to bg-slate-900/90');
+      assert.ok(widgetContent.includes('bg-gov-accent'), 'Must bind to bg-gov-accent');
     });
 
     it('should implement shared layoutId morphing and outside click listener', () => {
@@ -177,6 +181,32 @@ describe('Global Route-Aware Morphing AI Assistant Widget Suite', () => {
       assert.ok(
         layoutContent.includes('AIAssistantWidget'),
         'src/app/layout.tsx must import and mount AIAssistantWidget'
+      );
+      assert.ok(
+        layoutContent.includes('<Suspense') || widgetContent.includes('<Suspense'),
+        'AIAssistantWidget must be isolated within a Suspense boundary for React 19 compliance'
+      );
+    });
+
+    it('should declare all hooks unconditionally before evaluating the route visibility guard', () => {
+      const visibilityGuardIndex = widgetContent.indexOf("if (!pathname || pathname.startsWith('/account')");
+      const useEffectIndex = widgetContent.indexOf('useEffect(');
+      const useStateIndex = widgetContent.indexOf('useState(');
+
+      assert.ok(visibilityGuardIndex > -1, 'Visibility guard must exist');
+      assert.ok(
+        visibilityGuardIndex > useEffectIndex && visibilityGuardIndex > useStateIndex,
+        'Route visibility guard must be placed AFTER all React hooks to preserve hook count in React 19'
+      );
+    });
+    it('should explicitly enforce borderRadius: 9999px on FAB to prevent square-shape regressions on collapse', () => {
+      assert.ok(
+        widgetContent.includes("borderRadius: '9999px'"),
+        'Must explicitly declare borderRadius: 9999px on FAB animation and style targets'
+      );
+      assert.ok(
+        !widgetContent.includes('<AnimatePresence mode="wait">'),
+        'Must not use mode="wait" on AnimatePresence to ensure continuous shared layout morphing'
       );
     });
   });

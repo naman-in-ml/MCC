@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import './globals.css';
 import { AIAssistantWidget } from '@/components/ai/ai-assistant-widget';
 
@@ -24,7 +25,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-page text-content-primary antialiased" suppressHydrationWarning>
         {children}
-        <AIAssistantWidget />
+        <Suspense fallback={null}>
+          <AIAssistantWidget />
+        </Suspense>
       </body>
     </html>
   );

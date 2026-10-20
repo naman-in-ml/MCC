@@ -8,7 +8,7 @@
 [![Zustand](https://img.shields.io/badge/Zustand-5.0-brown?style=flat)](https://github.com/pmndrs/zustand)
 [![ECharts](https://img.shields.io/badge/Apache_ECharts-6.1-red?style=flat&logo=apache-echarts)](https://echarts.apache.org/)
 [![GIGW 3.0](https://img.shields.io/badge/Compliance-GIGW_3.0_%26_UX4G-orange?style=flat)](https://guidelines.india.gov.in/)
-[![Tests](https://img.shields.io/badge/Test_Suite-75%2F75_Passing_(100%25)-brightgreen?style=flat)](https://nodejs.org/api/test.html)
+[![Tests](https://img.shields.io/badge/Test_Suite-77%2F77_Passing_(100%25)-brightgreen?style=flat)](https://nodejs.org/api/test.html)
 [![Routes](https://img.shields.io/badge/App_Routes-31_Routes_(Static_%26_Dynamic)-blue?style=flat)](https://nextjs.org/)
 
 ---
@@ -382,7 +382,7 @@ maha-command-center/
 
 ### 4.7 Global Route-Aware Morphing AI Assistant Widget (`src/components/ai/`, `src/lib/ai/`, `src/app/api/ai/`)
 * **Persistent Root Mount**: Mounted globally inside `src/app/layout.tsx` so conversation history, scroll position, and open/closed state persist seamlessly across soft route navigations.
-* **Route Visibility Guard**: Strictly hidden and unmounted on Account routes: `if (!pathname || pathname.startsWith('/account')) return null;`.
+* **Route Visibility Guard**: Strictly hidden and unmounted on Login and Account routes: `if (!pathname || pathname.startsWith('/account') || pathname.startsWith('/login')) return null;`.
 * **Zero Hardcoded Colors**: Bound dynamically to semantic design tokens (`bg-primary`, `text-primary-foreground`, `bg-background/95`, `border-border`, `bg-muted/70`, `bg-secondary/60`) linked to institutional CSS variables.
 * **Spring-Physics Animation Choreography**:
   * *FAB Idle & Hover*: Spring physics (`stiffness: 400, damping: 25`) with hover scale (`1.07`, `y: -2px`) and 12° icon rotation.
@@ -422,7 +422,7 @@ Execute the complete test suite verifying authentication, skeleton loaders, exec
 ```bash
 npm test
 ```
-*Expected Result: All 75 tests across 23 suites pass with 100% success rate.*
+*Expected Result: All 77 tests across 23 suites pass with 100% success rate.*
 
 #### Running Individual Test Suites
 ```bash
