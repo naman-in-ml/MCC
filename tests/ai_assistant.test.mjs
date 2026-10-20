@@ -199,5 +199,15 @@ describe('Global Route-Aware Morphing AI Assistant Widget Suite', () => {
         'Route visibility guard must be placed AFTER all React hooks to preserve hook count in React 19'
       );
     });
+    it('should explicitly enforce borderRadius: 9999px on FAB to prevent square-shape regressions on collapse', () => {
+      assert.ok(
+        widgetContent.includes("borderRadius: '9999px'"),
+        'Must explicitly declare borderRadius: 9999px on FAB animation and style targets'
+      );
+      assert.ok(
+        !widgetContent.includes('<AnimatePresence mode="wait">'),
+        'Must not use mode="wait" on AnimatePresence to ensure continuous shared layout morphing'
+      );
+    });
   });
 });

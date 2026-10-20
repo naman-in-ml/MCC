@@ -205,26 +205,30 @@ export const AIAssistantWidgetContent: React.FC = () => {
 
   return (
     <div className="font-sans">
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {!isOpen ? (
           /* State 1: Collapsed Floating Action Button (FAB) */
           <motion.button
             key="fab"
             layoutId="ai-assistant-container"
             onClick={() => setIsOpen(true)}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
+            initial={{ scale: 0, borderRadius: '9999px' }}
+            animate={{ scale: 1, borderRadius: '9999px' }}
+            exit={{ scale: 0, opacity: 0, borderRadius: '9999px' }}
             whileHover={{ scale: 1.07, y: -2 }}
             whileTap={{ scale: 0.93 }}
             transition={{
               type: 'spring',
-              stiffness: 400,
-              damping: 25,
+              stiffness: 380,
+              damping: 30,
+              borderRadius: { duration: 0.2 },
             }}
-            style={{ transformOrigin: 'bottom right' }}
+            style={{
+              transformOrigin: 'bottom right',
+              borderRadius: '9999px',
+            }}
             aria-label="Open AI Command Assistant"
-            className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center cursor-pointer bg-primary text-primary-foreground shadow-lg hover:shadow-xl ring-1 ring-border/20 select-none group"
+            className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center cursor-pointer bg-primary text-primary-foreground shadow-lg hover:shadow-xl ring-1 ring-border/20 select-none group !rounded-full"
           >
             <motion.div
               animate={{ rotate: [0, 12, 0] }}
@@ -250,15 +254,19 @@ export const AIAssistantWidgetContent: React.FC = () => {
               opacity: 0,
               scale: 0.85,
               borderRadius: '9999px',
-              transition: { duration: 0.12 },
+              transition: { duration: 0.15 },
             }}
             transition={{
               type: 'spring',
               stiffness: 350,
               damping: 28,
               mass: 0.8,
+              borderRadius: { duration: 0.25 },
             }}
-            style={{ transformOrigin: 'bottom right' }}
+            style={{
+              transformOrigin: 'bottom right',
+              borderRadius: '24px',
+            }}
             className="fixed z-50 w-[calc(100vw-2rem)] right-4 bottom-4 h-[78vh] max-h-[620px] rounded-2xl sm:right-6 sm:bottom-6 sm:w-[400px] sm:h-[580px] sm:max-h-[calc(100vh-3rem)] sm:rounded-3xl bg-background/95 dark:bg-card/95 backdrop-blur-xl border border-border shadow-2xl flex flex-col overflow-hidden"
           >
             {/* 1. Sticky Header (56px) */}
