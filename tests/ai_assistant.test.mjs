@@ -150,12 +150,12 @@ describe('Global Route-Aware Morphing AI Assistant Widget Suite', () => {
       );
     });
 
-    it('should bind to project semantic design tokens without hardcoded colors', () => {
+    it('should bind to project semantic design tokens and dark tinted executive palette', () => {
       assert.ok(widgetContent.includes('bg-primary text-primary-foreground'), 'Must bind to bg-primary');
-      assert.ok(widgetContent.includes('bg-background/95'), 'Must bind to bg-background/95');
-      assert.ok(widgetContent.includes('border-border'), 'Must bind to border-border');
-      assert.ok(widgetContent.includes('bg-muted/70'), 'Must bind to bg-muted/70');
-      assert.ok(widgetContent.includes('bg-secondary/60'), 'Must bind to bg-secondary/60');
+      assert.ok(widgetContent.includes('bg-slate-950/90'), 'Must bind to dark tinted card bg-slate-950/90');
+      assert.ok(widgetContent.includes('border-slate-800/90'), 'Must bind to border-slate-800/90');
+      assert.ok(widgetContent.includes('bg-slate-900/90'), 'Must bind to bg-slate-900/90');
+      assert.ok(widgetContent.includes('bg-gov-accent'), 'Must bind to bg-gov-accent');
     });
 
     it('should implement shared layoutId morphing and outside click listener', () => {
