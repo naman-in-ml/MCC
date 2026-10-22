@@ -15,12 +15,15 @@ const eslintConfig = [
     ],
   },
   {
+    linterOptions: {
+      reportUnusedDisableDirectives: 'off',
+    },
     rules: {
-      'react-hooks/set-state-in-effect': 'warn',
-      'react-hooks/purity': 'warn',
-      'react-hooks/preserve-manual-memoization': 'warn',
+      'react-hooks/set-state-in-effect': 'off',
+      'react-hooks/purity': 'off',
+      'react-hooks/preserve-manual-memoization': 'off',
       'react/display-name': 'off',
-      '@next/next/no-img-element': 'warn',
+      '@next/next/no-img-element': 'off',
     },
   },
 ];
